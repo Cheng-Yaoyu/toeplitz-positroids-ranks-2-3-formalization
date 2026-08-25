@@ -1,0 +1,1327 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,tabularx}
+\usepackage[hidelinks,pdfusetitle]{hyperref}
+\usepackage{microtype}
+
+\allowdisplaybreaks
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\TN}{TN}
+\DeclareMathOperator{\conv}{conv}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\col}{\operatorname{col}}
+\newcommand{\Deltaij}[3]{\Delta^{#1#2}_{#3}}
+\newcommand{\transpose}{\mathsf T}
+\newcommand{\HS}{\operatorname{HS}}
+\newcommand{\PFinfty}{\mathrm{PF}_{\infty}}
+
+\title{TOEPLITZ POSITROIDS IN RANKS TWO AND THREE}
+\date{Third revised version, August 24, 2026}
+
+\author{Yaoyu Cheng}
+\address{Faculty of Business Administration, The Chinese University of Hong Kong, Hong Kong, China}
+\email{yaoyucheng@link.cuhk.edu.cn}
+
+\author{Sixuan Gu}
+\address{Institute of Mathematical Sciences, The Chinese University of Hong Kong, Hong Kong, China}
+\email{sixuangu@link.cuhk.edu.cn}
+
+\author{Wei Qi}
+\address{Department of Physics, The Ohio State University, Columbus, OH 43210, USA}
+\email{qi.673@osu.edu}
+
+\subjclass[2020]{Primary 15B48, 05B35; Secondary 14M15, 15A15, 26C10}
+\keywords{Totally nonnegative matrix; Toeplitz matrix; positroid; P\'olya-frequency sequence; convex chain; log-concavity}
+\hypersetup{
+  pdftitle={Toeplitz Positroids in Ranks Two and Three},
+  pdfauthor={Yaoyu Cheng, Sixuan Gu, and Wei Qi},
+  pdfkeywords={totally nonnegative matrix, Toeplitz matrix, positroid, Polya frequency sequence, convex chain, log-concavity}
+}
+
+\begin{document}
+
+\begin{abstract}
+Let $A=(a_{j-i})$ be a finite real totally nonnegative Toeplitz matrix.  We classify the positroids represented by full-row-rank totally nonnegative Toeplitz matrices in ranks two and three.  In rank two, after deletion of loops, the parallel classes are consecutive intervals, with endpoint restrictions forced by zero columns.  In rank three, order-two total nonnegativity is equivalent to coefficientwise nonnegativity, interval positive support, and log-concavity of the Toeplitz coefficients.  A Pascal moment normalization then sends the nonzero projective column classes to an ordered planar chain, and total nonnegativity is equivalent to convexity of the simplified chain.  Toeplitz structure forces every nontrivial parallel class to lie at an endpoint, and the remaining nonbases are precisely the triples contained in maximal collinear intervals.  Conversely, every compatible collection of prefix and suffix loops, endpoint parallel classes, and collinear intervals has a totally nonnegative Toeplitz realization.  The two-sided zero-boundary case is obtained from a sine-sequence base point and an invertible consecutive-minor Jacobian.  We also give a positive Toeplitz matrix whose corner minors are positive but which is not totally nonnegative.  For one-sided $\PFinfty$ sequences with finite Edrei data, we derive an exact support formula for every Toeplitz minor and identify the first-row-block positroid as a Schubert positroid.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A real matrix is \emph{totally nonnegative} if every minor determinant is nonnegative.  If a full-row-rank $r\times n$ matrix has nonnegative maximal minors, its column matroid is a positroid; equivalently, its row span belongs to the totally nonnegative Grassmannian.  Throughout the low-rank classification, however, we impose the stronger hypothesis that the Toeplitz representative itself is totally nonnegative in \emph{all} minor orders, rather than merely requiring its maximal minors to be nonnegative.
+
+Postnikov's theory gives several general descriptions of positroid cells, including planar networks, Grassmann necklaces, and decorated permutations \cite{Postnikov}.  For background on total positivity and P\'olya-frequency sequences, see \cite{Karlin,FJ}; Toeplitz total positivity and its modern geometric connections are surveyed in \cite{Rietsch,RietschSurvey}.  The additional Toeplitz equations
+\[
+ A_{ij}=a_{j-i}
+\]
+cut out a rigid linear subspace, and it is natural to ask which positroid cells admit an all-minor totally nonnegative Toeplitz representative.  This is Problem~1.3 in the current online AIM list, numbered Problem~9 in the original workshop handout \cite{AIM}.
+
+The surrounding literature treats complementary aspects of this question.  Postnikov's theory classifies positroid cells without imposing Toeplitz equations \cite{Postnikov}.  Rietsch studies geometric and representation-theoretic parametrizations of totally positive Toeplitz matrices \cite{Rietsch,RietschSurvey}.  Recent Hodge-theoretic work develops criteria and closure statements for special Toeplitz families, with a subsequent corrigendum \cite{HigherLorentzian,HigherLorentzianCorrigendum,McDaniel}.  Toeplitz-minor identities in terms of skew Schur specializations are developed in \cite{GarciaTierz}, while the supersymmetric and hook-Schur framework used in Section~\ref{sec:edrei} is classical \cite{BereleRegev,Stembridge,Macdonald}.  The new contribution here is instead a support-level classification in ranks two and three, including all loop, endpoint-parallel, and rank-two-flat degenerations, together with a realization of every compatible rank-three datum.  The separate arbitrary-rank result in Section~\ref{sec:edrei} is the extraction of sharp Toeplitz index inequalities, parameter-independent minor support, and a Schubert-positroid consequence for the restricted one-sided finite-Edrei family.
+
+The purpose of the low-rank part of this paper is to give a complete answer in ranks two and three, including all boundary degenerations.  The main difficulty is not the strictly positive region.  Once lower-order minors are allowed to vanish, a Toeplitz matrix may acquire zero columns, parallel classes, and rank-two interval flats.  These degenerations have to be removed in the correct order before the usual convex-chain picture becomes visible.
+
+Our first ingredient is an exact order-two criterion.  For a three-row Toeplitz matrix, total nonnegativity of all minors of order at most two is equivalent to coefficientwise nonnegativity, interval positive support, and log-concavity of the coefficient sequence.  Our second ingredient is the Pascal moment normalization
+\[
+ (x,y,z)^{\transpose}
+ \longmapsto
+ \left(1,\frac{y+2z}{x+y+z},\frac{z}{x+y+z}\right)^{\transpose}.
+\]
+For two nonzero columns $c_i,c_j$, the change in the first moment satisfies the subtraction-free identity
+\[
+ s_is_j(u_j-u_i)
+ =\Delta^{12}_{ij}+2\Delta^{13}_{ij}+\Delta^{23}_{ij},
+ \qquad s_j=\mathbf 1^{\transpose}c_j.
+\]
+Thus, under order-two total nonnegativity, the projective parameter $u$ is weakly increasing, and equality separates all three $2\times2$ minors: it occurs exactly when the columns are parallel.  After loops are deleted and one representative is retained from each parallel class, the remaining columns determine points $(u_j,v_j)$ with strictly increasing first coordinate.  Their $3\times3$ minors are positive multiples of oriented areas.  Consequently, rank-three total nonnegativity is equivalent to monotonicity of the consecutive edge slopes.
+
+The Toeplitz condition imposes an additional restriction which is absent for general rank-three positroids.  A nontrivial parallel class cannot occur in the interior of the nonloop interval.  The proof uses the same local defect in two maximal minors with opposite signs; total nonnegativity forces the defect to vanish and therefore extends the parallel class.  This leads to the following classification.
+
+\begin{theorem}[Rank-three classification]\label{thm:intro-rank3}
+Let $M$ be a rank-three positroid on $[n]$.  Then $M$ has a full-row-rank totally nonnegative $3\times n$ Toeplitz representation if and only if it is obtained from the following data.
+\begin{enumerate}
+\item The loops form the union of an initial interval and a terminal interval.
+\item In the intervening nonloop interval, the only possible nontrivial parallel classes are an initial class and a terminal class.  A class adjacent to a nonempty loop interval is necessarily a singleton.
+\item After deleting the loops and replacing each endpoint parallel class by one representative, there is a family of maximal rank-two ordinary intervals of size at least three.  Any two distinct intervals meet in at most one element, necessarily a common endpoint.  The first simplified element belongs to none of these intervals if the left loop interval is nonempty or the initial parallel class is nontrivial; the analogous condition holds on the right.  The entire simplified ground set is not one of the intervals.
+\end{enumerate}
+A triple is a nonbasis exactly when it contains a loop, contains two elements of an endpoint parallel class, or its three distinct simplified images lie in one of the specified intervals.  Every compatible collection of such data has a totally nonnegative Toeplitz realization.
+\end{theorem}
+
+The last assertion is an essential part of the result.  When at most one side has loops, realizations follow from an explicit recurrence that prescribes the consecutive slopes of the projective chain.  When both sides have loops, the nonloop block has the banded form
+\[
+ C(b)=
+ \begin{pmatrix}
+ b_0&b_1&\cdots&b_d&0&0\\
+ 0&b_0&\cdots&b_{d-1}&b_d&0\\
+ 0&0&\cdots&b_{d-2}&b_{d-1}&b_d
+ \end{pmatrix}.
+\]
+At the sine point $b_t=\sin((t+1)\pi/(d+2))$, all interior consecutive maximal minors vanish, while the order-two minors are strictly positive.  We prove that the map from the interior coefficients to the interior consecutive maximal minors has positive-definite Jacobian there.  The inverse function theorem then realizes an arbitrary sufficiently small nonnegative vector of consecutive minors, and hence every prescribed zero pattern.
+
+As a complementary arbitrary-rank result, we treat one-sided $\PFinfty$ sequences with finitely many positive Edrei parameters.  A supersymmetric Jacobi--Trudi expansion gives an exact zero--nonzero criterion for every Toeplitz minor.  On the first $r$ rows, the criterion reduces to a single Schubert condition and therefore identifies the represented positroid explicitly.
+
+The proof architecture is related to the positive-identity method of \cite{GCQ}.  There, signed determinant expansions are split into their even and odd halves and equality is descended without subtraction or additive cancellation.  Here, nonnegative minor identities and positive changes of coordinates play the corresponding role: a positive sum vanishes only when each summand vanishes, and local equality data descend to loops, parallel classes, and collinear intervals.
+
+The paper is organized as follows.  Section~2 fixes notation and records a corner-minor obstruction.  Section~3 gives the rank-two classification.  Section~4 proves the order-two Toeplitz criterion in rank three.  Sections~5 and~6 establish the convex-chain criterion and the endpoint-parallel theorem.  Section~7 states the exact combinatorial classification.  Sections~8 and~9 prove realizability, including the two-sided sine construction.  Section~10 gives the finite-Edrei support formula and its Schubert-positroid consequence.
+
+\section{Preliminaries and a corner obstruction}
+
+For integers $r\le n$, write
+\begin{equation}\label{eq:toeplitz}
+ T_r(a)=\bigl(a_{j-i}\bigr)_{\substack{1\le i\le r\\1\le j\le n}}.
+\end{equation}
+The coefficient sequence is extended by zero outside the displayed range whenever this is convenient.  We write $c_j$ for the $j$th column.  A matrix is $\TN_k$ if all minors of order at most $k$ are nonnegative.  A zero column is a \emph{loop}.  Two nonzero columns are \emph{parallel} if they are positive scalar multiples of one another.  Since all entries of a totally nonnegative matrix are nonnegative, proportional nonzero columns are automatically positive multiples.
+
+All intervals below are intervals in the natural order on the indicated ordered set.  More explicitly, if $F=\{f_1<\cdots<f_m\}$, its \emph{ordinary interval} from $f_u$ to $f_v$ is
+\[
+ [f_u,f_v]_F=\{f_u,f_{u+1},\ldots,f_v\}.
+\]
+For an interval $E\subseteq[n]$, a parallel class is called \emph{initial} or \emph{terminal} if it is the first or last parallel class in the natural order on $E$.  The \emph{simplification} of an ordered column configuration is obtained by deleting loops and retaining one representative from every parallel class.  A $2\times2$ Toeplitz minor is called \emph{nonstructural} if all four of its entries come from the positive coefficient support; under coefficientwise nonnegativity, these are precisely the $2\times2$ Toeplitz minors with four positive entries.
+
+For an $m\times n$ matrix, a \emph{corner minor} of order $k$ is formed either from the first $k$ rows and last $k$ columns, or from the last $k$ rows and first $k$ columns.  A consecutive maximal minor uses all rows and a consecutive block of $m$ columns.  We first separate the corner-minor question from the positroid classification.  The classical initial-minor test for total positivity is due to Gasca and Pe\~na \cite{GascaPena}; see also \cite{FJ}.  In the specialized corner/consecutive formulation quoted in \cite{McDaniel}, a matrix already known to be totally nonnegative is totally positive precisely when all of its corner minors and consecutive maximal minors are nonzero.  Without the prior total-nonnegativity hypothesis, corner minors do not provide a test, even for positive Toeplitz matrices.
+
+\begin{proposition}[Corner obstruction]\label{prop:corner}
+Let
+\[
+ B(a,b)=
+ \begin{pmatrix}
+ 1&a&b\\
+ a&1&a\\
+ b&a&1
+ \end{pmatrix},
+ \qquad a>1,\qquad 1<b<a^2.
+\]
+Then every entry and every corner minor of $B(a,b)$ is positive, but $B(a,b)$ is not totally nonnegative.
+\end{proposition}
+
+\begin{proof}
+The order-one corner minors are $b$.  The two order-two corner minors are both
+\[
+ \det\begin{pmatrix}a&b\\1&a\end{pmatrix}=a^2-b>0,
+\]
+and
+\[
+ \det B(a,b)=(b-1)(2a^2-b-1)>0.
+\]
+On the other hand, the leading principal minor of order two is
+\[
+ \det\begin{pmatrix}1&a\\a&1\end{pmatrix}=1-a^2<0.
+\]
+\end{proof}
+
+The numerical choice $(a,b)=(2,2)$ gives the particularly small example
+\[
+ \begin{pmatrix}1&2&2\\2&1&2\\2&2&1\end{pmatrix}.
+\]
+
+\section{Rank two}
+
+Let
+\begin{equation}\label{eq:rank2A}
+ A=
+ \begin{pmatrix}
+ a_0&a_1&\cdots&a_{n-1}\\
+ a_{-1}&a_0&\cdots&a_{n-2}
+ \end{pmatrix}.
+\end{equation}
+When $a_{j-1}>0$, put
+\begin{equation}\label{eq:qrank2}
+ q_j=\frac{a_{j-2}}{a_{j-1}}.
+\end{equation}
+After division by the positive scalar $a_{j-1}$, the $j$th column is $(1,q_j)^{\transpose}$.  Consequently, for $i<j$ with both columns having positive first coordinate,
+\begin{equation}\label{eq:rank2minor}
+ \det(c_i,c_j)=a_{i-1}a_{j-1}(q_j-q_i).
+\end{equation}
+The endpoint values $q=0$ and $q=+\infty$ represent the rays $e_1$ and $e_2$.
+
+\begin{theorem}[Rank-two classification]\label{thm:rank2}
+A rank-two positroid on $[n]$ has a full-row-rank totally nonnegative $2\times n$ Toeplitz representation if and only if the following hold.
+\begin{enumerate}
+\item Its loops form the union of an initial interval and a terminal interval.
+\item The intervening nonloop interval is partitioned into consecutive parallel classes, with at least two classes.
+\item If the initial loop interval is nonempty, then the first parallel class is a singleton.  If the terminal loop interval is nonempty, then the last parallel class is a singleton.
+\end{enumerate}
+The requirement of at least two nonloop classes is exactly the full-row-rank condition.  Every such ordered partition is realizable.
+\end{theorem}
+
+\begin{proof}
+Suppose first that $A$ is totally nonnegative and has rank two.  The positive support of the coefficient sequence is an interval.  Indeed, if $a_p,a_q>0$ are consecutive positive coefficients separated by zeros, with $p<q$, then columns $p+2$ and $q+1$ give
+\[
+ \det\begin{pmatrix}a_{p+1}&a_q\\a_p&a_{q-1}\end{pmatrix}
+ =-a_pa_q<0,
+\]
+a contradiction.  It follows immediately from \eqref{eq:rank2A} that the zero columns form a prefix and a suffix.
+
+On the nonloop interval, the projective parameters $q_j\in[0,+\infty]$ are weakly increasing by \eqref{eq:rank2minor}.  Hence each equality class is consecutive, and these equality classes are exactly the parallel classes.  If there is a loop on the left, the first nonzero column is a positive multiple of $e_1$ while the next nonzero column has positive second coordinate, so the first class is a singleton.  The right-end assertion is symmetric.
+
+Conversely, let the prescribed nonloop interval be $E=[u,v]$.  Choose weakly increasing projective values $q_j$ on $E$, constant precisely on the prescribed parallel classes.  If $u>1$, set $q_u=0$; if $v<n$, set $q_v=+\infty$.  All remaining values are finite and positive.  The singleton conditions ensure that neither projective endpoint is repeated.
+
+Set
+\[
+ L=\begin{cases}-1,&u=1,\\u-1,&u>1,\end{cases}
+ \qquad
+ U=\begin{cases}n-1,&v=n,\\v-2,&v<n.\end{cases}
+\]
+We construct a coefficient sequence with positive support exactly $[L,U]$.  If $u=1$, choose $a_{-1}>0$ and put $a_0=a_{-1}/q_1$.  If $u>1$, choose $a_L=a_{u-1}>0$, in which case $q_u=0$ is automatic.  For every subsequent finite $q_j$, define recursively
+\[
+ a_{j-1}=\frac{a_{j-2}}{q_j}.
+\]
+Set all coefficients outside $[L,U]$ equal to zero.  At a prescribed left boundary the first nonloop column is a positive multiple of $e_1$, and at a prescribed right boundary the last is a positive multiple of $e_2$.  Formula \eqref{eq:rank2minor}, with these projective endpoint conventions, gives exactly the desired loops and parallel classes and proves total nonnegativity.
+\end{proof}
+
+\begin{corollary}\label{cor:rank2positive}
+Let $A$ be a totally nonnegative $2\times n$ Toeplitz matrix with all entries positive.  Then the parallel classes of its column matroid form a composition of $n$: the parts are the consecutive parallel classes.  If $A$ has full row rank, at least two parts occur.
+\end{corollary}
+
+\begin{proof}
+Every column is nonzero.  Total nonnegativity and \eqref{eq:rank2minor} make the projective parameters $q_j$ weakly increasing, and two columns are parallel exactly when their projective parameters agree.  Hence every parallel class is a consecutive interval, and the classes form a composition of $n$.  If there were only one class, all columns would be parallel and $A$ would have rank one; therefore full row rank forces at least two parts.
+\end{proof}
+
+\paragraph{Why total nonnegativity is necessary.}
+Entrywise positivity alone does not imply the conclusion.  The positive Toeplitz matrix
+\[
+ \begin{pmatrix}
+ 1&2&2\\
+ 1&1&2
+ \end{pmatrix}
+\]
+has its first and third columns parallel, while its middle column is not parallel to them, so the parallel class is not consecutive.  This matrix is not totally nonnegative: the minor on its first two columns is $-1$.
+
+\section{Order-two total nonnegativity in three rows}
+
+We now consider
+\begin{equation}\label{eq:rank3A}
+ A=T_3(a)=
+ \begin{pmatrix}
+ a_0&a_1&\cdots&a_{n-1}\\
+ a_{-1}&a_0&\cdots&a_{n-2}\\
+ a_{-2}&a_{-1}&\cdots&a_{n-3}
+ \end{pmatrix},
+\end{equation}
+with columns
+\begin{equation}\label{eq:rank3col}
+ c_j=(a_{j-1},a_{j-2},a_{j-3})^{\transpose}.
+\end{equation}
+The following elementary criterion is the finite order-two P\'olya-frequency condition adapted to the displayed Toeplitz section.
+
+\begin{lemma}[The $\TN_2$ criterion]\label{lem:TN2criterion}
+The matrix $A$ in \eqref{eq:rank3A} is $\TN_2$ if and only if
+\begin{enumerate}
+\item $a_k\ge0$ for every displayed coefficient index $-2\le k\le n-1$;
+\item the positive coefficient support
+\[
+ \{k:a_k>0\}
+\]
+is an integer interval, possibly empty; and
+\item at every interior index of this interval,
+\begin{equation}\label{eq:logconcavity}
+ a_k^2\ge a_{k-1}a_{k+1}.
+\end{equation}
+\end{enumerate}
+For the nonstructural minor in \eqref{eq:general2minor}, equality holds precisely when
+\[
+ \rho_{x-h+1}=\rho_{x-h+2}=\cdots=\rho_{x+\ell}.
+\]
+\end{lemma}
+
+\begin{proof}
+Assume first that $A$ is $\TN_2$.  Its order-one minors give $a_k\ge0$ throughout the displayed coefficient range.  Suppose $a_p,a_q>0$, $p<q$, and
+\[
+ a_{p+1}=\cdots=a_{q-1}=0.
+\]
+Choose $p,q$ with no positive coefficient strictly between them.  If $p\ge-1$, use the first two rows; if $p=-2$ and $q\le n-2$, use the last two rows.  In either case a suitable pair of columns gives
+\[
+ \det\begin{pmatrix}a_{p+1}&a_q\\a_p&a_{q-1}\end{pmatrix}=-a_pa_q<0.
+\]
+The only remaining extreme case is $p=-2$ and $q=n-1$; the first and third rows and the first and last columns give the same negative product.  Thus the positive support is an interval.
+
+The adjacent $2\times2$ minors in the first two or last two rows give \eqref{eq:logconcavity}.  On the positive support define
+\begin{equation}\label{eq:rho}
+ \rho_k=\frac{a_k}{a_{k-1}}.
+\end{equation}
+Then \eqref{eq:logconcavity} is equivalent to weak decrease of the sequence $\rho_k$.
+
+Conversely, assume conditions (1)--(3), and consider any two rows at distance $h\in\{1,2\}$ and two columns at distance $\ell>0$.  The corresponding determinant has the form
+\begin{equation}\label{eq:general2minor}
+ a_xa_{x+\ell-h}-a_{x+\ell}a_{x-h}.
+\end{equation}
+If the second product is zero, the first product is nonnegative by coefficientwise nonnegativity.  If the second product is positive, interval support makes all four factors positive.  Dividing by positive factors reduces nonnegativity to
+\[
+ \frac{a_x}{a_{x-h}}\ge
+ \frac{a_{x+\ell}}{a_{x+\ell-h}},
+\]
+which follows because the left side is a product of $h$ coefficient ratios lying weakly to the left of those in the right side.  More explicitly, the two sides are the products of $\rho_{x-h+1},\ldots,\rho_x$ and $\rho_{x+\ell-h+1},\ldots,\rho_{x+\ell}$, respectively.  Since $\rho$ is weakly decreasing, equality of these products holds precisely when every ratio from the leftmost to the rightmost index is equal, namely when
+\[
+ \rho_{x-h+1}=\rho_{x-h+2}=\cdots=\rho_{x+\ell}.
+\]
+This proves both assertions.
+\end{proof}
+
+\begin{remark}\label{rem:naive-consecutive}
+Order-two total nonnegativity together with nonnegative consecutive $3\times3$ minors does not imply total nonnegativity.  For example,
+\[
+ \begin{pmatrix}
+ 1&1&1&0\\
+ 1&1&1&1\\
+ 0&1&1&1
+ \end{pmatrix}
+\]
+is $\TN_2$ and has both consecutive maximal minors equal to zero, but its minors on columns $124$ and $134$ are $-1$.  The middle two columns are parallel.  This is why loops and parallel classes must be removed before a consecutive-minor criterion can be used.
+\end{remark}
+
+\section{Pascal moments and convex chains}
+
+Let $c=(x,y,z)^{\transpose}\in\RR_{\ge0}^3$ be nonzero, and define
+\begin{equation}\label{eq:moments}
+ s(c)=x+y+z,
+ \qquad
+ u(c)=\frac{y+2z}{s(c)},
+ \qquad
+ v(c)=\frac{z}{s(c)}.
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:pascal}
+ \begin{pmatrix}1\\u(c)\\v(c)\end{pmatrix}
+ =\frac1{s(c)}
+ \begin{pmatrix}
+ 1&1&1\\
+ 0&1&2\\
+ 0&0&1
+ \end{pmatrix}c.
+\end{equation}
+The matrix in \eqref{eq:pascal} has determinant one and is totally nonnegative.
+
+For columns $c_i,c_j$, write
+\[
+ \Delta^{pq}_{ij}
+ =\det\begin{pmatrix}(c_i)_p&(c_j)_p\\(c_i)_q&(c_j)_q\end{pmatrix},
+ \qquad 1\le p<q\le3.
+\]
+
+\begin{lemma}[Moment summand separation]\label{lem:moment-separation}
+For nonzero columns $c_i,c_j\in\RR_{\ge0}^3$,
+\begin{equation}\label{eq:moment-separation}
+ s(c_i)s(c_j)\bigl(u(c_j)-u(c_i)\bigr)
+ =\Delta^{12}_{ij}+2\Delta^{13}_{ij}+\Delta^{23}_{ij}.
+\end{equation}
+If the two-column matrix $(c_i,c_j)$ is totally nonnegative, then
+\[
+ u(c_i)\le u(c_j),
+\]
+and equality holds if and only if $c_i$ and $c_j$ are parallel.
+\end{lemma}
+
+\begin{proof}
+Expanding the left side of \eqref{eq:moment-separation} gives the displayed positive linear combination of the three row minors.  Under total nonnegativity all three summands are nonnegative.  Their sum is zero precisely when all three vanish, which is equivalent to the two columns having rank one.
+\end{proof}
+
+Let $A$ be $\TN_2$.  Delete its loops and retain one representative from each parallel class, denoting the resulting columns by
+\[
+ \widehat c_1,\ldots,\widehat c_m.
+\]
+By Lemma~\ref{lem:moment-separation}, their moment points
+\begin{equation}\label{eq:points}
+ P_1=(u_1,v_1),\ldots,P_m=(u_m,v_m)
+\end{equation}
+are indexed so that
+\begin{equation}\label{eq:ustrict}
+ u_1<u_2<\cdots<u_m.
+\end{equation}
+When $m\ge2$, define the consecutive edge slopes
+\begin{equation}\label{eq:sigma}
+ \sigma_\alpha
+ =\frac{v_{\alpha+1}-v_\alpha}{u_{\alpha+1}-u_\alpha},
+ \qquad 1\le\alpha<m.
+\end{equation}
+
+\begin{theorem}[Convex-chain criterion]\label{thm:convex-chain}
+Let $A$ be a nonnegative $3\times n$ matrix.  Then $A$ is totally nonnegative if and only if $A$ is $\TN_2$ and the slopes of its simplified configuration satisfy
+\[
+ \sigma_1\le\cdots\le\sigma_{m-1}.
+\]
+The slope condition is understood as vacuous when $m\le2$.  Under these equivalent conditions, if $1\le i<j<k\le m$, then
+\begin{equation}\label{eq:zero-slope-run}
+ \det(\widehat c_i,\widehat c_j,\widehat c_k)=0
+ \quad\Longleftrightarrow\quad
+ \sigma_i=\sigma_{i+1}=\cdots=\sigma_{k-1}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Assume first that $A$ is $\TN_2$ and form its simplified configuration as above.  By \eqref{eq:pascal}, for three representative columns,
+\begin{equation}\label{eq:area}
+ \det(\widehat c_i,\widehat c_j,\widehat c_k)
+ =s(\widehat c_i)s(\widehat c_j)s(\widehat c_k)
+ \det\begin{pmatrix}
+ 1&1&1\\
+ u_i&u_j&u_k\\
+ v_i&v_j&v_k
+ \end{pmatrix}.
+\end{equation}
+The final determinant is the oriented area of $P_i,P_j,P_k$.  For points with strictly increasing first coordinate, all such areas are nonnegative if and only if the consecutive edge slopes are weakly increasing.  Indeed, the slope of any chord is a positive weighted average of the consecutive slopes that it crosses.  Thus monotonicity of the consecutive slopes places the average slope on $[i,j]$ below the average slope on $[j,k]$.  Conversely, the triples of consecutive points give $\sigma_\alpha\le\sigma_{\alpha+1}$.
+
+Under this monotonicity, equality of the two chord averages can hold only when every consecutive slope from $i$ through $k-1$ has the same value.  This proves \eqref{eq:zero-slope-run}.  Triples containing a loop or two parallel columns vanish automatically, and every other maximal minor differs from one in \eqref{eq:area} by a positive product of parallel-class scaling factors.  Together with the assumed $\TN_2$ condition, this proves both implications of the asserted equivalence.
+\end{proof}
+
+A nontrivial maximal constant run of the edge-slope sequence---that is, a run containing at least two edges---corresponds to a maximal interval of at least three collinear simplified points.  Two such vertex intervals can share one endpoint but have disjoint interiors.  This elementary observation supplies the interval part of the classification.
+
+\begin{corollary}[Strict order-two region]\label{cor:strict-count}
+Suppose $n\ge3$, $A$ is a positive $3\times n$ Toeplitz matrix, and every $2\times2$ minor is positive.  Then its rank-three positroid is determined by the equality pattern in
+\[
+ \sigma_1\le\sigma_2\le\cdots\le\sigma_{n-1}.
+\]
+If $A$ has rank three, the number of possible positroid supports in this region is
+\[
+ 2^{n-2}-1.
+\]
+\end{corollary}
+
+\begin{proof}
+There are $n-2$ adjacent comparisons.  Each may be an equality or a strict inequality, and the all-equality pattern has rank two.  The vanishing of the consecutive triple $(P_\alpha,P_{\alpha+1},P_{\alpha+2})$ records exactly the equality $\sigma_\alpha=\sigma_{\alpha+1}$, so distinct equality subsets give distinct maximal-minor supports.  Theorem~\ref{thm:convex-chain} shows that no further support data occur.  Every equality pattern other than the all-equality one is realized by Proposition~\ref{prop:one-sided-realization}, applied with no loops and singleton endpoint classes.
+\end{proof}
+
+\section{Toeplitz parallel classes occur only at the ends}
+
+For a general totally nonnegative rank-three matrix, an interior parallel class is possible.  Toeplitz structure rules it out.
+
+\begin{theorem}[Endpoint-parallel theorem]\label{thm:endpoint-parallel}
+Let $A=T_3(a)$ be a full-row-rank totally nonnegative matrix.  Among the nonloop columns, every nontrivial parallel class is either the initial class or the terminal class.  In particular, there are at most two nontrivial parallel classes.
+
+If the initial loop interval is nonempty, the initial nonloop class is a singleton.  If the terminal loop interval is nonempty, the terminal nonloop class is a singleton.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:TN2criterion}, the positive coefficient support is an interval.  The assertion about a class adjacent to loops is immediate.  At the left support boundary the first nonzero column has the form $(a_L,0,0)^{\transpose}$ and the next nonzero column has positive second coordinate, so they are not parallel.  The right boundary is analogous.
+
+It remains to exclude an internal maximal parallel class.  Suppose that the consecutive columns
+\[
+ c_p,c_{p+1},\ldots,c_q,
+ \qquad L=q-p+1\ge2,
+\]
+form such a class and have nonparallel nonzero neighbors on both sides.  Every column in the class and both of its neighbors are nonloops.  Since the positive coefficient support is an interval, all coefficients in the geometric segment forced by these columns are strictly positive.  Parallelism and the Toeplitz shifts therefore imply that, for some $c,\lambda>0$,
+\begin{equation}\label{eq:geometric-run}
+ a_{p-3+t}=c\lambda^t,
+ \qquad 0\le t\le L+1.
+\end{equation}
+Write
+\begin{equation}\label{eq:endparams}
+ a_{p-4}=ec,
+ \qquad
+ a_q=fc,
+ \qquad e,f\ge0.
+\end{equation}
+The adjacent order-two minors at the two ends of the geometric run give
+\begin{equation}\label{eq:endineq}
+ e\lambda\le1,
+ \qquad
+ f\le\lambda^{L+2}.
+\end{equation}
+A direct determinant computation gives
+\begin{equation}\label{eq:parallel-trap}
+ \det(c_{p-1},c_p,c_{q+1})
+ =c^3\bigl(\lambda^{L+2}-f\bigr)(e\lambda-1).
+\end{equation}
+The right side is nonpositive by \eqref{eq:endineq}, whereas total nonnegativity makes it nonnegative.  Hence it is zero.  If $e\lambda=1$, then $c_{p-1}$ is parallel to $c_p$.  If $f=\lambda^{L+2}$, then $c_{q+1}$ is parallel to $c_q$.  Either alternative contradicts maximality of the internal class.
+\end{proof}
+
+The endpoints of a nontrivial parallel class are also protected from belonging to a collinear interval after simplification.
+
+\begin{lemma}[Endpoint protection]\label{lem:endpoint-protection}
+Let $A=T_3(a)$ be full-row-rank and totally nonnegative, and let $P_1,\ldots,P_m$ be its simplified projective chain.
+\begin{enumerate}
+\item If the initial loop interval is nonempty or the initial parallel class is nontrivial, then $P_1$ belongs to no collinear interval containing three simplified points.
+\item If the terminal loop interval is nonempty or the terminal parallel class is nontrivial, then $P_m$ belongs to no collinear interval containing three simplified points.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Suppose first that loops occur on the left.  After translating the coefficient indices, the first three nonloop columns are
+\[
+ (b_0,0,0)^{\transpose},
+ \qquad
+ (b_1,b_0,0)^{\transpose},
+ \qquad
+ (b_2,b_1,b_0)^{\transpose},
+ \qquad b_0>0.
+\]
+Their determinant is $b_0^3>0$.  Hence they represent the first three distinct simplified points, and those points are not collinear.
+
+Now suppose there are no left loops and that the initial parallel class is
+\[
+ c_1,\ldots,c_p,
+ \qquad p\ge2.
+\]
+Full row rank implies $p+2\le n$, since a single projective class followed by at most one further column spans a space of dimension at most two.  Put
+\[
+ A_0=a_{p-1}>0,
+ \qquad
+ R=\frac{a_{p-2}}{a_{p-1}},
+ \qquad
+ t=\frac{a_p}{A_0},
+ \qquad
+ w=\frac{a_{p+1}}{A_0}.
+\]
+The Toeplitz shifts and parallelism inside the initial class give
+\[
+ c_p=A_0\begin{pmatrix}1\\R\\R^2\end{pmatrix},
+ \qquad
+ c_{p+1}=A_0\begin{pmatrix}t\\1\\R\end{pmatrix},
+ \qquad
+ c_{p+2}=A_0\begin{pmatrix}w\\t\\1\end{pmatrix}.
+\]
+Therefore
+\begin{equation}\label{eq:endpoint-protection-det}
+ \det(c_p,c_{p+1},c_{p+2})
+ =A_0^3
+ \det\begin{pmatrix}
+ 1&t&w\\
+ R&1&t\\
+ R^2&R&1
+ \end{pmatrix}
+ =A_0^3(1-Rt)^2.
+\end{equation}
+Coefficientwise nonnegativity and log-concavity at the right end of the initial geometric run give
+\[
+ a_{p-1}^2\ge a_{p-2}a_p,
+ \qquad\text{hence}\qquad Rt\le1.
+\]
+If $Rt=1$, then $c_{p+1}=t c_p$, contradicting maximality of the initial parallel class.  Thus the determinant in \eqref{eq:endpoint-protection-det} is positive, so $c_p,c_{p+1},c_{p+2}$ represent the first three distinct simplified points and are not collinear.  Notice that this argument allows $a_p$ or $a_{p+1}$ to vanish and therefore covers the coefficient-support boundary cases.
+
+In either left-end case, every ordinary interval containing $P_1$ and at least three simplified points contains the first three simplified points.  It therefore cannot be collinear, by Theorem~\ref{thm:convex-chain}.  The right-end assertion follows by reversing both row and column orders.  This operation preserves all minor signs because the two reversal signs cancel.
+\end{proof}
+
+For later use in the positive Toeplitz chart, whenever $a_{j-1}>0$ write
+\begin{equation}\label{eq:rdef}
+ r_j=\frac{a_{j-2}}{a_{j-1}}.
+\end{equation}
+After normalizing the first coordinate, column $j$ corresponds to
+\begin{equation}\label{eq:rpoint}
+ Q_j=(r_j,r_{j-1}r_j).
+\end{equation}
+
+\section{The combinatorial classification in rank three}
+
+We now state the data in Theorem~\ref{thm:intro-rank3} precisely.  Let
+\begin{equation}\label{eq:loops}
+ L_0=[1,\ell],
+ \qquad
+ R_0=[r,n]
+\end{equation}
+be possibly empty intervals, and let
+\begin{equation}\label{eq:nonloops}
+ E=[\ell+1,r-1]
+\end{equation}
+be the nonloop interval.  Let $P$ and $Q$ denote the first and last parallel classes in $E$; they are consecutive initial and terminal subintervals of $E$ and are allowed to be singletons.  Delete $L_0\cup R_0$ and replace $P,Q$ by one representative each.  The resulting ordered simple set will be written
+\begin{equation}\label{eq:simpleE}
+ \overline E=\{e_1<e_2<\cdots<e_m\}.
+\end{equation}
+Let
+\[
+ \pi:E\longrightarrow\overline E
+\]
+be the order-preserving simplification map, which collapses each endpoint parallel class to its chosen representative and fixes every other element.  For $J\subseteq E$, write $\overline J=\pi(J)$ for its set of simplified images.
+
+\begin{definition}[Compatible rank-three Toeplitz data]\label{def:compatible}
+A collection
+\[
+ \mathcal D=(L_0,R_0;P,Q;\mathcal H)
+\]
+is compatible if the following conditions hold.
+\begin{enumerate}
+\item $L_0,R_0,E,P,Q$, and $\overline E$ are as above, with $m\ge3$.
+\item The only nonsingleton parallel classes are $P$ and $Q$.  If $L_0\ne\varnothing$, then $|P|=1$; if $R_0\ne\varnothing$, then $|Q|=1$.
+\item $\mathcal H$ is a family of prescribed maximal rank-two ordinary intervals
+\[
+ H=[e_u,e_v]_{\overline E}\subseteq\overline E,
+ \qquad v-u+1\ge3,
+\]
+such that two distinct members meet in at most one element, necessarily a common endpoint.
+\item If $L_0\ne\varnothing$ or $|P|>1$, no member of $\mathcal H$ contains $e_1$.  If $R_0\ne\varnothing$ or $|Q|>1$, no member contains $e_m$.
+\item No member of $\mathcal H$ is all of $\overline E$.
+\end{enumerate}
+\end{definition}
+
+Given compatible data, declare a triple $J\in\binom{[n]}3$ to be a nonbasis if and only if one of the following holds:
+\begin{enumerate}
+\item $J\cap(L_0\cup R_0)\ne\varnothing$;
+\item $J$ contains two elements of $P$ or two elements of $Q$;
+\item $J$ has three distinct simplified images and $\overline J\subseteq H$ for some $H\in\mathcal H$.
+\end{enumerate}
+The word ``maximal'' in Definition~\ref{def:compatible} is automatic from this rule and the intersection condition.  Indeed, if $X\subseteq\overline E$ has at least three elements and every three-element subset of $X$ is declared a nonbasis, choose $x_1,x_2,x_3\in X$.  They lie in some $H_0\in\mathcal H$.  For any $x\in X$, the triple $\{x,x_1,x_2\}$ lies in some $H_x\in\mathcal H$; since $H_x$ and $H_0$ share two elements, the intersection condition forces $H_x=H_0$.  Thus $X\subseteq H_0$.  Consequently the members of $\mathcal H$ are precisely the maximal subsets of the simplified ground set of size at least three whose three-element subsets are nonbases.
+
+\begin{theorem}[Exact rank-three cell list]\label{thm:rank3-list}
+The nonbases of a full-row-rank totally nonnegative $3\times n$ Toeplitz matrix arise from a unique compatible collection $\mathcal D$ in the preceding sense.  Conversely, the basis set associated with every compatible collection is represented by a full-row-rank totally nonnegative $3\times n$ Toeplitz matrix.
+\end{theorem}
+
+\begin{proof}[Proof of necessity]
+Lemma~\ref{lem:TN2criterion} shows that the coefficient support is an interval, so the loops form a prefix and a suffix.  Theorem~\ref{thm:endpoint-parallel} gives the stated parallel classes and their restrictions.  After simplification, Theorem~\ref{thm:convex-chain} identifies maximal collinear intervals with maximal constant runs of the weakly increasing edge-slope sequence.  Such intervals meet in at most one endpoint.  Lemma~\ref{lem:endpoint-protection} gives the endpoint restrictions, and full row rank excludes one collinear interval containing all simplified points.
+
+A maximal minor vanishes precisely in one of the three stated ways: it contains a loop, it contains a parallel pair, or its three distinct projective classes are collinear.
+
+It remains to justify uniqueness from the positroid support, rather than from a chosen representing matrix.  The basis set determines the rank-three matroid.  Its loops are exactly the elements contained in no basis.  For two nonloops $e,f$, the pair is parallel if and only if no basis contains both: every independent pair in a matroid extends to a basis.  Hence all parallel classes, and in particular the ordered endpoint classes $P$ and $Q$, are determined.  After simplification, a subset $X$ of at least three elements has rank two if and only if every three-element subset of $X$ is a nonbasis.  Therefore the maximal rank-two flats of the simplified matroid are determined by the basis support.  The preceding necessity argument identifies those flats with the ordinary intervals in $\mathcal H$.  Thus $\mathcal D=(L_0,R_0;P,Q;\mathcal H)$ is uniquely recovered from the positroid.
+\end{proof}
+
+The converse will be proved in Sections~8 and~9.  The compatible data classify the maximal-minor support.  For a given Toeplitz representative, the lower-order support is recovered separately: order-one support comes from the coefficient interval, and order-two support is given by Lemma~\ref{lem:TN2criterion} and its equality statement.
+
+\section{Realization with at most one loop boundary}
+
+When all relevant coefficients are positive, division of the $j$th column by $a_{j-1}$ gives
+\begin{equation}\label{eq:positive-chart}
+ \frac{c_j}{a_{j-1}}
+ =\bigl(1,r_j,r_{j-1}r_j\bigr)^{\transpose},
+ \qquad
+ r_j=\frac{a_{j-2}}{a_{j-1}}.
+\end{equation}
+Thus every maximal minor is a positive multiple of the oriented area of the affine points
+\[
+ Q_j=(r_j,r_{j-1}r_j).
+\]
+Weak increase of the consecutive $Q$-edge slopes is therefore equivalent to nonnegativity of all maximal minors, and constant slope runs give exactly the collinear intervals.  This is a second affine chart of the projective construction in Section~5; the positive projective change of coordinates preserves determinant signs and collinearity.
+
+We first record the elementary recurrence used to prescribe a convex projective chain in this positive Toeplitz chart.
+
+\begin{lemma}[Finite-slope synthesis]\label{lem:slope-synthesis}
+Let
+\[
+ 0<s_1\le s_2\le\cdots\le s_{N-1}
+\]
+be a finite weakly increasing sequence.  There exist
+\[
+ 0<r_0<r_1<\cdots<r_N
+\]
+such that the consecutive slopes of the points
+\begin{equation}\label{eq:synthpoints}
+ Q_j=(r_j,r_{j-1}r_j),
+ \qquad 1\le j\le N,
+\end{equation}
+are exactly $s_1,\ldots,s_{N-1}$.
+\end{lemma}
+
+\begin{proof}
+For three successive ratios, the slope of $Q_jQ_{j+1}$ is
+\begin{equation}\label{eq:slopeformula}
+ \frac{r_jr_{j+1}-r_{j-1}r_j}{r_{j+1}-r_j}
+ =r_j\frac{r_{j+1}-r_{j-1}}{r_{j+1}-r_j}.
+\end{equation}
+Solving the equation that this slope equal $s_j$ gives
+\begin{equation}\label{eq:recurrence}
+ r_{j+1}
+ =r_j+\frac{r_j(r_j-r_{j-1})}{s_j-r_j}.
+\end{equation}
+Take $r_0(\varepsilon)=\varepsilon$ and $r_1(\varepsilon)=2\varepsilon$.  We construct the remaining ratios as continuous rational functions of $\varepsilon$ on a common interval.  Suppose inductively that $r_{j-1}(\varepsilon)$ and $r_j(\varepsilon)$ are defined for all sufficiently small $\varepsilon>0$ and both tend to zero as $\varepsilon\to0^+$.  Since the prescribed number $s_j$ is fixed and positive, there is an interval on which $s_j-r_j(\varepsilon)>0$.  Formula~\eqref{eq:recurrence} then defines a continuous rational function $r_{j+1}(\varepsilon)$, gives $r_{j+1}>r_j$, and shows that $r_{j+1}(\varepsilon)\to0$.
+
+There are only finitely many recurrence steps.  Taking the minimum of their finitely many admissible thresholds gives one number $\varepsilon_0>0$ such that every denominator is positive and every strict inequality
+\[
+ 0<r_0<r_1<\cdots<r_N
+\]
+holds simultaneously for $0<\varepsilon<\varepsilon_0$.  Direct substitution into \eqref{eq:slopeformula} verifies the prescribed slopes.
+\end{proof}
+
+Given positive ratios $r_0,\ldots,r_n$, set
+\begin{equation}\label{eq:recovercoeff}
+ a_{-1}=1,
+ \qquad
+ a_{-2}=r_0,
+ \qquad
+ a_{j-1}=\frac{a_{j-2}}{r_j}
+ \quad(1\le j\le n).
+\end{equation}
+Then $r_j=a_{j-2}/a_{j-1}$, and the normalized Toeplitz columns are the points \eqref{eq:rpoint}.  A weakly increasing ratio sequence gives $\TN_2$ by Lemma~\ref{lem:TN2criterion}; a strictly increasing sequence gives strict positivity of every nonstructural order-two minor.
+
+The following endpoint modifications will be used repeatedly.
+
+\begin{lemma}[Endpoint modifications]\label{lem:endpoint-modifications}
+The construction in Lemma~\ref{lem:slope-synthesis} admits the following variants.
+\begin{enumerate}
+\item If
+\[
+ r_0=r_1=\cdots=r_p=R<r_{p+1},
+\]
+then columns $1,\ldots,p$ form an initial parallel class.  The first edge of the simplified chain has slope $R$.  Subsequent finite slopes can be prescribed by \eqref{eq:recurrence}.
+\item If a strictly increasing construction reaches $r_{k-1}<r_k=R$ and one appends
+\[
+ r_{k+1}=\cdots=r_{k+q}=R,
+\]
+then columns $k+1,\ldots,k+q$ form a terminal parallel class.  The last edge of the simplified chain, from $Q_k$ to this class, is vertical; all earlier points and edges are unchanged.
+\item At a left coefficient-support boundary, set $a_{-2}=a_{-1}=0$ and choose $a_0>0$.  Put $r_1=0$, choose $r_2>0$, and for $j\ge2$ recover the later coefficients from $a_{j-1}=a_{j-2}/r_j$.  With the harmless convention $r_0=0$ in the projective formula, the first nonloop point is $(0,0)$, the next is $(r_2,0)$, and the first edge has slope zero.  All later finite slopes can again be prescribed by \eqref{eq:recurrence}.  A right support boundary is obtained by reversing rows and columns.
+\end{enumerate}
+The indexing in these three variants is summarized below.
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.23\textwidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Ratio or support data & Raw columns affected & Effect after simplification \\
+\midrule
+$r_0=\cdots=r_p=R<r_{p+1}$
+& $c_1,\ldots,c_p$
+& Initial projective class; the first simplified edge has slope $R$. \\
+$r_{k-1}<r_k=\cdots=r_{k+q}=R$
+& $c_{k+1},\ldots,c_{k+q}$
+& Terminal projective class; the final simplified edge is vertical. \\
+$a_{-2}=a_{-1}=0<a_0$ with $r_0=r_1=0$
+& the first two nonloop columns
+& The first simplified edge is horizontal. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+The simultaneous use of the two endpoint modifications, including the raw-column counts and the common smallness threshold, is formalized in Lemma~\ref{lem:endpoint-aware-synthesis} below.
+\end{lemma}
+
+\begin{proof}
+For (1), the points $Q_1,\ldots,Q_p$ all equal $(R,R^2)$, while
+\[
+ Q_{p+1}=(r_{p+1},Rr_{p+1});
+\]
+the slope from the first projective class to the next is $R$.  The next finite slope is given by \eqref{eq:slopeformula} and is larger than $r_{p+1}>R$.  For (2),
+\[
+ Q_k=(R,r_{k-1}R),
+ \qquad
+ Q_{k+1}=\cdots=Q_{k+q}=(R,R^2),
+\]
+so the last simplified edge is vertical.  Appending the ratios $r_{k+1},\ldots,r_{k+q}$ does not alter any $Q_j$ with $j\le k$, and hence does not alter any earlier edge.  In part (3), normalization of the first two nonloop columns gives $(0,0)$ and $(r_2,0)$ directly; the next slope is positive.  The recurrence and coefficient recovery are unchanged away from the modified endpoint.
+\end{proof}
+
+\begin{lemma}[Endpoint-aware finite-slope synthesis]\label{lem:endpoint-aware-synthesis}
+Let
+\[
+ \mathcal D=(L_0,\varnothing;P,Q;\mathcal H)
+\]
+be compatible rank-three Toeplitz data, and write
+\[
+ p=|P|,\qquad q=|Q|,\qquad
+ \overline E=\{e_1<\cdots<e_m\}.
+\]
+After deleting $L_0$ and relabeling the nonloop columns by $1,\ldots,N$, where
+\[
+ N=p+q+m-2,
+ \qquad
+ k=p+m-2,
+\]
+there is a Toeplitz coefficient sequence for which the simplification map has fibers
+\begin{equation}\label{eq:raw-simple-map}
+\begin{aligned}
+ \pi^{-1}(e_1)&=\{1,\ldots,p\},\\
+ \pi^{-1}(e_i)&=\{p+i-1\} &&(2\le i\le m-1),\\
+ \pi^{-1}(e_m)&=\{k+1,\ldots,k+q\}.
+\end{aligned}
+\end{equation}
+The only nonsingleton parallel classes are the first and last fibers in \eqref{eq:raw-simple-map}, and the nontrivial maximal constant runs of the simplified edge-slope sequence are exactly the intervals in $\mathcal H$.  The resulting matrix is full-row-rank and totally nonnegative.
+\end{lemma}
+
+\begin{proof}
+For an interval $H=[e_u,e_v]_{\overline E}$, the corresponding prescribed equality block consists of the edges $u,u+1,\ldots,v-1$.  Because distinct members of $\mathcal H$ meet in at most one endpoint, these edge blocks are disjoint.  Choose fixed positive numbers
+\[
+ \beta_1\le\beta_2\le\cdots\le\beta_{m-1}
+\]
+whose nontrivial maximal constant runs are precisely those blocks.  We may choose all $\beta_i\ge1$.  If the left endpoint is protected, meaning that $L_0\ne\varnothing$ or $p>1$, compatibility says that no prescribed block contains both the first and second edges, and we choose $\beta_1<\beta_2$.  If $q>1$, the right endpoint is protected and we similarly choose $\beta_{m-2}<\beta_{m-1}$.  Empty or one-edge ranges require no condition.
+
+Put
+\[
+ \delta=\begin{cases}1,&q>1,\\0,&q=1.\end{cases}
+\]
+We now construct the ratios.  There are three left-end types.
+
+\smallskip
+\emph{Free left endpoint: $L_0=\varnothing$ and $p=1$.}
+Set $r_0=\varepsilon$ and $r_1=2\varepsilon$.  For
+\[
+ 1\le i\le m-1-\delta
+\]
+apply \eqref{eq:recurrence} with $j=i$ and target slope $\beta_i$.
+
+\smallskip
+\emph{Initial parallel class: $L_0=\varnothing$ and $p>1$.}
+Set
+\[
+ r_0=\cdots=r_p=\varepsilon,
+ \qquad r_{p+1}=2\varepsilon.
+\]
+The first simplified edge then has slope $\varepsilon$.  For
+\[
+ 2\le i\le m-1-\delta
+\]
+apply \eqref{eq:recurrence} with $j=p+i-1$ and target slope $\beta_i$.
+
+\smallskip
+\emph{Left support boundary: $L_0\ne\varnothing$.}
+Compatibility gives $p=1$.  Use $r_0=r_1=0$ and $r_2=\varepsilon$ as in Lemma~\ref{lem:endpoint-modifications}(3).  The first simplified edge has slope zero.  For
+\[
+ 2\le i\le m-1-\delta
+\]
+apply \eqref{eq:recurrence} with $j=i$ and target slope $\beta_i$.
+
+In each case the targets used in the recurrence are fixed positive numbers.  The finite-induction argument in Lemma~\ref{lem:slope-synthesis}, with the starting index shifted when necessary, gives a single $\varepsilon_0>0$ for which every denominator is positive and every ratio outside the prescribed plateaux is strictly increasing whenever $0<\varepsilon<\varepsilon_0$.  Shrinking $\varepsilon_0$ further, we may assume $2\varepsilon<1$, so the protected first slope is strictly smaller than the next finite slope.
+
+If $q=1$, the recurrence reaches $r_N=r_{k+1}$ and produces the last finite simplified edge.  If $q>1$, it stops after reaching $r_k$; append
+\[
+ r_{k+1}=\cdots=r_{k+q}=r_k.
+\]
+Lemma~\ref{lem:endpoint-modifications}(2) shows that columns $k+1,\ldots,k+q$ form the terminal class and that the final simplified edge is vertical.  Since the appendage uses only new ratios, every earlier point and edge is unchanged.  The vertical final slope is strictly larger than the preceding finite slope.
+
+When $L_0=\varnothing$, recover positive Toeplitz coefficients by \eqref{eq:recovercoeff}.  When $L_0\ne\varnothing$, use the boundary recovery in Lemma~\ref{lem:endpoint-modifications}(3), and then translate the coefficient support to insert exactly the prescribed initial loop block.  The ratio sequence is weakly increasing and is strictly increasing away from the prescribed endpoint plateaux and the structural zeros at a support boundary.  Hence Lemma~\ref{lem:TN2criterion} gives $\TN_2$, and the fiber description \eqref{eq:raw-simple-map} follows directly from the column indices above.
+
+The simplified slopes are $\beta_i$ on every unprotected finite edge, are $0$ or $\varepsilon$ at a protected left edge, and are $+\infty$ at a protected right edge.  The strict endpoint comparisons and the compatibility conditions therefore leave the prescribed nontrivial constant runs unchanged.  By Theorem~\ref{thm:convex-chain}, these runs give exactly the members of $\mathcal H$ and exclude every unintended collinear triple.  No member of $\mathcal H$ is all of $\overline E$, so the simplified chain is not collinear and the matrix has row rank three.  The same theorem now gives total nonnegativity.
+\end{proof}
+
+\begin{proposition}[Realization without two-sided loops]\label{prop:one-sided-realization}
+Let $\mathcal D$ be compatible rank-three Toeplitz data.  If at least one of the loop intervals $L_0,R_0$ is empty, then $\mathcal D$ has a full-row-rank totally nonnegative Toeplitz realization.
+\end{proposition}
+
+\begin{proof}
+If $R_0=\varnothing$, apply Lemma~\ref{lem:endpoint-aware-synthesis} directly.  If $R_0\ne\varnothing$, then $L_0=\varnothing$; reverse the ordered data, apply the lemma, and reverse both the row and column orders of the resulting matrix.  The two reversal signs cancel in every minor, and the operation restores exactly the original loops, endpoint classes, and ordinary intervals.  Thus every compatible datum with at most one loop boundary is realized, with no additional parallel class or rank-two interval.
+\end{proof}
+
+\paragraph{A mixed boundary example.}
+The Toeplitz matrix
+\[
+ A=
+ \begin{pmatrix}
+ 0&3&9&18&27&36&48&64\\
+ 0&0&3&9&18&27&36&48\\
+ 0&0&0&3&9&18&27&36
+ \end{pmatrix}
+\]
+has coefficient sequence $a_{-2}=a_{-1}=a_0=0$ and
+\[
+ (a_1,\ldots,a_7)=(3,9,18,27,36,48,64).
+\]
+Its compatible data are
+\[
+ L_0=\{1\},\qquad R_0=\varnothing,\qquad
+ P=\{2\},\qquad Q=\{7,8\},\qquad
+ \mathcal H=\bigl\{[3,5]_{\overline E}\bigr\},
+\]
+where $\overline E=\{2,3,4,5,6,7\}$ and $\pi(8)=7$.  With the left-boundary convention, the ratios are
+\[
+ (r_2,\ldots,r_8)
+ =\left(0,\frac13,\frac12,\frac23,\frac34,\frac34,\frac34\right),
+\]
+and the simplified edge slopes are
+\[
+ 0,\ 1,\ 1,\ 2,\ +\infty.
+\]
+Thus columns $3,4,5$ form the unique maximal collinear interval, while $c_8=\frac43c_7$ gives the terminal parallel class.  The coefficient sequence is nonnegative, has interval positive support, and is log-concave; the displayed slope sequence is weakly increasing.  Lemma~\ref{lem:TN2criterion} and Theorem~\ref{thm:convex-chain} therefore prove total nonnegativity, and the representative maximal minors
+\[
+ \det(c_3,c_4,c_5)=0,
+ \qquad
+ \det(c_2,c_3,c_4)=27>0
+\]
+display respectively the prescribed interval flat and full row rank.  This example simultaneously exhibits a loop boundary, a nontrivial opposite endpoint parallel class, and an interior rank-two interval flat.
+
+\section{The two-sided boundary and the sine base}
+
+It remains to treat the case in which both loop intervals are nonempty.  After deleting the loops and translating the coefficient indices, the nonloop block has the form
+\begin{equation}\label{eq:Cbanded}
+ C(b)=
+ \begin{pmatrix}
+ b_0&b_1&\cdots&b_d&0&0\\
+ 0&b_0&\cdots&b_{d-1}&b_d&0\\
+ 0&0&\cdots&b_{d-2}&b_{d-1}&b_d
+ \end{pmatrix},
+ \qquad b_0,\ldots,b_d>0.
+\end{equation}
+The first and last nonloop columns are automatically singleton parallel classes.  Put
+\[
+ b_{-2}=b_{-1}=b_{d+1}=b_{d+2}=0
+\]
+and define the consecutive maximal minors
+\begin{equation}\label{eq:Dt}
+ D_t(b)=
+ \det\begin{pmatrix}
+ b_t&b_{t+1}&b_{t+2}\\
+ b_{t-1}&b_t&b_{t+1}\\
+ b_{t-2}&b_{t-1}&b_t
+ \end{pmatrix},
+ \qquad 0\le t\le d.
+\end{equation}
+In particular,
+\begin{equation}\label{eq:endD}
+ D_0=b_0^3,
+ \qquad
+ D_d=b_d^3.
+\end{equation}
+
+\paragraph{Consecutive determinants and slope differences.}
+Write the columns of $C(b)$ as
+\[
+ c_j=(b_j,b_{j-1},b_{j-2})^{\transpose},
+ \qquad 0\le j\le d+2.
+\]
+Suppose that $b$ is strictly log-concave, with the zero boundary convention.  Lemma~\ref{lem:TN2criterion} then makes $C(b)$ $\TN_2$ with all nonstructural $2\times2$ minors positive.  The boundary support patterns and the strict nonstructural minors exclude parallel columns, so Lemma~\ref{lem:moment-separation} gives strictly increasing moment coordinates
+\[
+ u_0<u_1<\cdots<u_{d+2}.
+\]
+Put $\omega_j=\mathbf1^{\transpose}c_j>0$, let $P_j=(u_j,v_j)$, and set
+\[
+ \sigma_j=\frac{v_{j+1}-v_j}{u_{j+1}-u_j},
+ \qquad 0\le j\le d+1.
+\]
+Applying the oriented-area identity \eqref{eq:area} to three consecutive columns gives the exact formula
+\begin{align}
+ D_t
+ &={}\omega_t\omega_{t+1}\omega_{t+2}
+ (u_{t+1}-u_t)(u_{t+2}-u_{t+1})
+ (\sigma_{t+1}-\sigma_t)\notag\\
+ &=:\kappa_t(\sigma_{t+1}-\sigma_t),
+ \qquad \kappa_t>0,
+ \qquad 0\le t\le d.\label{eq:D-slope}
+\end{align}
+Consequently,
+\[
+ D_t\ge0\ \text{for all }t
+ \quad\Longleftrightarrow\quad
+ \sigma_0\le\sigma_1\le\cdots\le\sigma_{d+1},
+\]
+and $D_t=0$ if and only if $\sigma_t=\sigma_{t+1}$.  This is the precise bridge between the consecutive-minor coordinates and the convex-chain criterion used below.
+
+\subsection*{The sine point}
+Assume $d\ge2$ and set
+\begin{equation}\label{eq:sinebase}
+ \theta=\frac{\pi}{d+2},
+ \qquad
+ b_t^{(0)}=\sin((t+1)\theta),
+ \qquad 0\le t\le d.
+\end{equation}
+Write
+\begin{equation}\label{eq:sc}
+ s=\sin\theta,
+ \qquad c=\cos\theta.
+\end{equation}
+The identities
+\begin{equation}\label{eq:sineidentities}
+ \bigl(b_t^{(0)}\bigr)^2-b_{t-1}^{(0)}b_{t+1}^{(0)}=s^2,
+ \qquad
+ b_{t+1}^{(0)}=2c\,b_t^{(0)}-b_{t-1}^{(0)}
+\end{equation}
+hold with the zero boundary convention.
+
+\begin{lemma}[Sine base point]\label{lem:sinebase}
+The matrix $C(b^{(0)})$ is totally nonnegative of rank three.  Every nonstructural $2\times2$ minor is positive, and
+\begin{equation}\label{eq:sineD}
+ D_0>0,
+ \qquad
+ D_1=\cdots=D_{d-1}=0,
+ \qquad
+ D_d>0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The first identity in \eqref{eq:sineidentities} and Lemma~\ref{lem:TN2criterion} give strict order-two total nonnegativity.  The recurrence in \eqref{eq:sineidentities} places the middle columns $1,\ldots,d+1$ in the plane
+\begin{equation}\label{eq:sineplane}
+ x-2cy+z=0.
+\end{equation}
+Thus the interior determinants in \eqref{eq:sineD} vanish, while \eqref{eq:endD} gives positive endpoint determinants.  Formula~\eqref{eq:D-slope} shows that the consecutive edge slopes are weakly increasing, with strict increases at the two ends.  Hence Theorem~\ref{thm:convex-chain} proves total nonnegativity.  The positive endpoint determinants give rank three.
+\end{proof}
+
+We now show that the interior determinants form local coordinates at this point.  Fix $b_0,b_d$ and consider
+\begin{equation}\label{eq:Phi}
+ \Phi:(b_1,\ldots,b_{d-1})
+ \longmapsto
+ (D_1,\ldots,D_{d-1}).
+\end{equation}
+Let $T$ be the $(d-1)\times(d-1)$ tridiagonal matrix
+\begin{equation}\label{eq:Tmatrix}
+ T=
+ \begin{pmatrix}
+ 2c&-1&&\\
+ -1&2c&-1&\\
+ &\ddots&\ddots&\ddots\\
+ &&-1&2c
+ \end{pmatrix}.
+\end{equation}
+When $d=2$, the two endpoint rank-one terms below refer to the same coordinate and are both retained.
+
+\begin{theorem}[Consecutive-minor Jacobian]\label{thm:jacobian}
+At the sine point \eqref{eq:sinebase},
+\begin{equation}\label{eq:jacobian}
+ D\Phi
+ =s^2\bigl(T^2+e_1e_1^{\transpose}+e_{d-1}e_{d-1}^{\transpose}\bigr).
+\end{equation}
+In particular, $D\Phi$ is positive definite and hence invertible.
+\end{theorem}
+
+\begin{proof}
+Expanding \eqref{eq:Dt} gives
+\begin{align}\label{eq:Dpolynomial}
+ D_t={}&b_t^3-2b_{t-1}b_tb_{t+1}
+      +b_{t-2}b_{t+1}^2+b_{t-1}^2b_{t+2}
+      -b_{t-2}b_tb_{t+2}.
+\end{align}
+Differentiate this expression and substitute \eqref{eq:sineidentities}.  The nonzero entries in row $t$ of the Jacobian are, before truncation at the two fixed endpoints,
+\begin{equation}\label{eq:jacentries}
+ s^2,
+ \quad -4cs^2,
+ \quad (4c^2+2)s^2,
+ \quad -4cs^2,
+ \quad s^2
+\end{equation}
+across offsets $-2,-1,0,1,2$.  The square of \eqref{eq:Tmatrix} has these two off-diagonals and first off-diagonals, while its two endpoint diagonal entries are $(4c^2+1)s^2$.  The two rank-one terms supply the missing endpoint contributions, proving \eqref{eq:jacobian}.
+
+The eigenvalues of $T$ are
+\begin{equation}\label{eq:Teigen}
+ 2c-2\cos\frac{k\pi}{d},
+ \qquad 1\le k\le d-1.
+\end{equation}
+They are positive because
+\[
+ \cos\frac{\pi}{d+2}>\cos\frac{\pi}{d}.
+\]
+Thus $T^2$ is positive definite, and so is the matrix in \eqref{eq:jacobian}.
+\end{proof}
+
+\begin{theorem}[Arbitrary interior zero pattern]\label{thm:arbitrary-Z}
+For every subset
+\[
+ Z\subseteq\{1,\ldots,d-1\},
+\]
+there is a positive vector $b=(b_0,\ldots,b_d)$, arbitrarily close to the sine vector, such that $C(b)$ is totally nonnegative of rank three and
+\begin{equation}\label{eq:Zpattern}
+ D_t(b)=0
+ \quad\Longleftrightarrow\quad
+ t\in Z
+ \qquad(1\le t\le d-1).
+\end{equation}
+All nonstructural minors of order at most two are positive.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:jacobian} and the inverse function theorem, the map \eqref{eq:Phi} sends a neighborhood of $(b_1^{(0)},\ldots,b_{d-1}^{(0)})$ diffeomorphically onto a neighborhood of the origin.  Choose $\eta>0$ so that the Euclidean ball $B_\eta(0)$ lies in this image neighborhood, and choose a target vector in $B_\eta(0)$ of the form
+\[
+ \delta_t=
+ \begin{cases}
+ 0,&t\in Z,\\
+ \varepsilon_t>0,&t\notin Z.
+ \end{cases}
+\]
+Its inverse image has positive coefficients and remains strictly log-concave, because these are open conditions at the sine point.  Hence all nonstructural order-two minors are positive.  The endpoint determinants remain positive by \eqref{eq:endD}, while the interior determinants are the prescribed nonnegative numbers $\delta_t$.  Formula~\eqref{eq:D-slope} therefore makes the consecutive edge slopes weakly increasing, and Theorem~\ref{thm:convex-chain} gives total nonnegativity.  The positive endpoint determinants give rank three.
+\end{proof}
+
+\begin{proposition}[Two-sided realization]\label{prop:two-sided-realization}
+Every compatible collection $\mathcal D$ with both $L_0$ and $R_0$ nonempty has a full-row-rank totally nonnegative Toeplitz realization.
+\end{proposition}
+
+\begin{proof}
+After deleting the loop columns, both endpoint parallel classes are singletons by compatibility.  If $d=0$, the choice $b_0=1$ gives
+\[
+ C(b)=I_3.
+\]
+If $d=1$, the choice $b_0=b_1=1$ gives
+\[
+ C(b)=
+ \begin{pmatrix}
+ 1&1&0&0\\
+ 0&1&1&0\\
+ 0&0&1&1
+ \end{pmatrix};
+\]
+its four maximal minors are all equal to $1$, and its lower-order minors are nonnegative.  In both cases compatibility permits no collinear interval of size three away from the protected endpoints, so these blocks have exactly the required support.  Assume henceforth that $d\ge2$.  Index the simplified nonloop columns of \eqref{eq:Cbanded} by $0,1,\ldots,d+2$.  A collinear vertex interval $[u,v]$ corresponds, by \eqref{eq:D-slope} and Theorem~\ref{thm:convex-chain}, to the vanishing of
+\[
+ D_u,D_{u+1},\ldots,D_{v-2}.
+\]
+Endpoint protection ensures that all these indices lie in $\{1,\ldots,d-1\}$.  Let $Z$ be the union of the resulting maximal zero runs.  Theorem~\ref{thm:arbitrary-Z} realizes exactly this set.  Formula~\eqref{eq:D-slope} and Theorem~\ref{thm:convex-chain} then exclude every additional collinear triple: a triple is collinear precisely when all intervening determinants in the corresponding run vanish.  In particular, two prescribed intervals meeting at one endpoint correspond to two zero runs separated by one positive determinant.  Restoring the prescribed translations on the two sides inserts the loop intervals without changing the nonloop minor support.
+\end{proof}
+
+\begin{proof}[Completion of the proof of Theorems~\ref{thm:intro-rank3} and~\ref{thm:rank3-list}]
+Necessity was proved in Section~7.  Proposition~\ref{prop:one-sided-realization} realizes every compatible collection with at most one nonempty loop interval, and Proposition~\ref{prop:two-sided-realization} treats the remaining case.  The constructions preserve precisely the prescribed loop, parallel, and collinearity data, so their maximal-minor supports are exactly the asserted positroids.
+\end{proof}
+
+\begin{example}\label{ex:golden}
+For $d=3$, the sine base is proportional to
+\[
+ (1,\varphi,\varphi,1),
+ \qquad
+ \varphi=\frac{1+\sqrt5}{2}.
+\]
+Its consecutive maximal minors are
+\[
+ (D_0,D_1,D_2,D_3)=(1,0,0,1)
+\]
+after the same scaling.  Small perturbations supplied by Theorem~\ref{thm:arbitrary-Z} independently realize the four interior zero patterns
+\[
+ \varnothing,\qquad\{1\},\qquad\{2\},\qquad\{1,2\}.
+\]
+\end{example}
+
+
+\section{Finite Edrei specializations}\label{sec:edrei}
+
+We close with a support formula for a classical infinite P\'olya-frequency subfamily.  This section is independent of the low-rank classification, but it gives a direct parameter-to-positroid rule for the part of the AIM problem arising from finite Edrei data.  The supersymmetric and hook-Schur expansions and their finite-variable nonvanishing criteria are classical \cite{BereleRegev,Stembridge,Macdonald}.  The contribution here is their translation into the sharp Toeplitz index conditions \eqref{eq:structural}--\eqref{eq:hookineq}, the resulting parameter-independence of minor support, and the Schubert-positroid consequence for a first-row block.  Let $p,q\in\mathbb Z_{\ge0}$ and
+\begin{equation}\label{eq:EdreiH}
+ H(z)=e^{\gamma z}
+ \frac{\prod_{b=1}^{q}(1+\beta_bz)}
+      {\prod_{a=1}^{p}(1-\alpha_az)}
+ =\sum_{k\ge0}h_kz^k,
+ \qquad
+ \alpha_a,\beta_b>0,
+ \quad \gamma\ge0,
+\end{equation}
+and put $h_k=0$ for $k<0$.  By the Aissen--Edrei--Schoenberg--Whitney and Edrei theorems, these generating functions belong to the standard parameterization of one-sided $\PFinfty$ sequences \cite{AESW,Edrei,RietschSurvey}.  Let
+\begin{equation}\label{eq:infiniteT}
+ \mathcal T=(h_{j-i})_{i,j\ge1}.
+\end{equation}
+For increasing $r$-subsets
+\[
+ I=\{i_1<\cdots<i_r\},
+ \qquad
+ J=\{j_1<\cdots<j_r\},
+\]
+define partitions
+\begin{equation}\label{eq:lambdamu}
+ \lambda_t=j_{r+1-t}-(r+1-t),
+ \qquad
+ \mu_t=i_{r+1-t}-(r+1-t),
+ \qquad 1\le t\le r.
+\end{equation}
+We use the zero-tail convention $\lambda_t=\mu_t=0$ beyond the displayed lengths.  Toeplitz minors and skew Schur specializations are related by the Jacobi--Trudi identity; see also \cite{GarciaTierz,Macdonald}.
+
+\begin{theorem}[Finite Edrei support formula]\label{thm:Edrei-support}
+For the matrix \eqref{eq:infiniteT}, the following hold.
+
+If $\gamma=0$, then
+\begin{equation}\label{eq:Edrei-positive}
+ \det\mathcal T[I,J]>0
+\end{equation}
+if and only if
+\begin{align}
+ i_k&\le j_k &&(1\le k\le r),\label{eq:structural}\\
+ j_{k-p}+p-q&\le i_k &&(p<k\le r).\label{eq:hookineq}
+\end{align}
+When $p\ge r$, the second family is empty.
+
+If $\gamma>0$, then
+\begin{equation}\label{eq:gamma-positive}
+ \det\mathcal T[I,J]>0
+ \quad\Longleftrightarrow\quad
+ i_k\le j_k\quad(1\le k\le r).
+\end{equation}
+Consequently, the support depends only on $(p,q,\mathbf 1_{\gamma>0})$, not on the positive values of the individual parameters.
+\end{theorem}
+
+\begin{proof}
+Condition \eqref{eq:structural} is equivalent to $\mu\subseteq\lambda$.  If it fails, the Jacobi--Trudi determinant has structural zeros and vanishes.  Assume it holds.  When $\gamma=0$, Jacobi--Trudi gives the supersymmetric skew Schur specialization
+\begin{equation}\label{eq:HSJT}
+ \det\mathcal T[I,J]
+ =\HS_{\lambda/\mu}(\alpha_1,\ldots,\alpha_p;
+                         \beta_1,\ldots,\beta_q).
+\end{equation}
+It has the positive expansion
+\begin{equation}\label{eq:HSexpansion}
+ \HS_{\lambda/\mu}(X;Y)
+ =\sum_{\mu\subseteq\nu\subseteq\lambda}
+   s_{\nu/\mu}(X)s_{\lambda'/\nu'}(Y).
+\end{equation}
+Because every variable is positive, a summand is nonzero exactly when $\nu/\mu$ has at most $p$ boxes in every column and $\lambda/\nu$ has at most $q$ boxes in every row.  In partition notation these conditions are
+\begin{equation}\label{eq:nuconditions}
+ \nu_{t+p}\le\mu_t,
+ \qquad
+ \lambda_t-\nu_t\le q.
+\end{equation}
+Such a partition $\nu$ exists if and only if
+\begin{equation}\label{eq:partitionhook}
+ \lambda_{t+p}\le\mu_t+q
+ \qquad(1\le t\le r-p).
+\end{equation}
+Necessity follows immediately from \eqref{eq:nuconditions}.  For sufficiency take
+\begin{equation}\label{eq:nuchoice}
+ \nu_t=\max\{\mu_t,\lambda_t-q\}.
+\end{equation}
+This is a partition between $\mu$ and $\lambda$, and \eqref{eq:partitionhook} gives $\nu_{t+p}\le\mu_t$.  Translating \eqref{eq:partitionhook} through \eqref{eq:lambdamu}, with $k=r+1-t$, gives exactly \eqref{eq:hookineq}.
+
+When $\gamma>0$, let $E_\gamma$ denote the exponential specialization with generating series $e^{\gamma z}$.  For every finite skew shape,
+\begin{equation}\label{eq:exponential-skew}
+ s_{\lambda/\mu}(E_\gamma)
+ =\frac{\gamma^{|\lambda/\mu|}}{|\lambda/\mu|!}
+ f^{\lambda/\mu}>0,
+\end{equation}
+where $f^{\lambda/\mu}$ is the number of standard Young tableaux of shape $\lambda/\mu$.  This number is positive because the finite cell poset of a skew shape has a linear extension.  Let $\mathsf S_{p,q}$ denote the finite supersymmetric specialization in \eqref{eq:HSJT}.  The skew-Schur coproduct is
+\begin{equation}\label{eq:Edrei-coproduct}
+ s_{\lambda/\mu}(\mathsf S_{p,q}+E_\gamma)
+ =\sum_{\mu\subseteq\nu\subseteq\lambda}
+   s_{\lambda/\nu}(\mathsf S_{p,q})
+   s_{\nu/\mu}(E_\gamma).
+\end{equation}
+The term $\nu=\lambda$ assigns the entire skew shape to $E_\gamma$ and is strictly positive by \eqref{eq:exponential-skew}, while every other term is nonnegative.  Hence the left side of \eqref{eq:Edrei-coproduct} is positive for every valid skew shape $\lambda/\mu$, and only \eqref{eq:structural} remains.
+\end{proof}
+
+\begin{corollary}[The first-row-block positroid]\label{cor:Edrei-positroid}
+Fix $n\ge r$ and restrict \eqref{eq:infiniteT} to its first $r$ rows and first $n$ columns.  Suppose $\gamma=0$ and $p<r$.  For
+\[
+ J=\{j_1<\cdots<j_r\}\subseteq[n],
+\]
+the maximal minor on $J$ is positive if and only if
+\begin{equation}\label{eq:Schubert-condition}
+ j_{r-p}\le r-p+q,
+\end{equation}
+or equivalently
+\begin{equation}\label{eq:Schubert-cardinality}
+ |J\cap[1,r-p+q]|\ge r-p.
+\end{equation}
+Hence the represented positroid is the Schubert positroid determined by the rank condition \eqref{eq:Schubert-cardinality}.  If $p\ge r$, or $q\ge n-r$, or $\gamma>0$, it is the uniform positroid $U_{r,n}$.
+\end{corollary}
+
+\begin{proof}
+For $I=[r]$, condition \eqref{eq:structural} is automatic.  Writing $\ell=k-p$, the inequalities \eqref{eq:hookineq} become
+\[
+ j_\ell\le\ell+q,
+ \qquad 1\le\ell\le r-p.
+\]
+Monotonicity of the $j_\ell$ makes this family equivalent to its last inequality, which is \eqref{eq:Schubert-condition}.  The cardinality form and the uniform cases follow immediately.
+\end{proof}
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+
+During the preparation of this work, the authors used OpenAI's ChatGPT to explore proof strategies, check formal polynomial identities, and assist in drafting.  The authors reviewed and edited the resulting material and take full responsibility for the content of the publication.
+
+\begin{thebibliography}{99}
+
+\bibitem{AIM}
+American Institute of Mathematics,
+\emph{Theory and applications of total positivity, Problem 1.3
+(Problem 9 in the original workshop handout)},
+\url{https://aimpl.org/totalpos/1/}.
+
+\bibitem{AESW}
+M. Aissen, A. Edrei, I. J. Schoenberg, and A. Whitney,
+\emph{On the generating functions of totally positive sequences},
+Proc. Nat. Acad. Sci. U.S.A. \textbf{37} (1951), 303--307.
+
+\bibitem{BereleRegev}
+A. Berele and A. Regev,
+\emph{Hook Young diagrams with applications to combinatorics and to representations of Lie superalgebras},
+Adv. Math. \textbf{64} (1987), no.~2, 118--175;
+\url{https://doi.org/10.1016/0001-8708(87)90007-7}.
+
+\bibitem{Edrei}
+A. Edrei,
+\emph{Proof of a conjecture of Schoenberg on the generating function of a totally positive sequence},
+Canad. J. Math. \textbf{5} (1953), 86--94.
+
+\bibitem{FJ}
+S. M. Fallat and C. R. Johnson,
+\emph{Totally Nonnegative Matrices},
+Princeton Series in Applied Mathematics, Princeton University Press, Princeton, NJ, 2011.
+
+\bibitem{GascaPena}
+M. Gasca and J. M. Pe\~na,
+\emph{Total positivity, QR factorization, and Neville elimination},
+SIAM J. Matrix Anal. Appl. \textbf{14} (1993), no.~4, 1132--1140;
+\url{https://doi.org/10.1137/0614077}.
+
+\bibitem{GCQ}
+S. Gu, W. Qi, and Y. Cheng,
+\emph{Transpose symmetry of injectivity over commutative semirings},
+arXiv:2608.16205 (2026).
+
+\bibitem{GarciaTierz}
+D. Garc\'ia-Garc\'ia and M. Tierz,
+\emph{Toeplitz minors and specializations of skew Schur polynomials},
+J. Combin. Theory Ser. A \textbf{172} (2020), 105201.
+
+\bibitem{HigherLorentzian}
+P. Macias Marques, C. McDaniel, and A. Seceleanu,
+\emph{Higher Lorentzian polynomials, higher Hessians, and the Hodge--Riemann relations for graded oriented Artinian Gorenstein algebras in codimension two},
+Int. Math. Res. Not. IMRN (2025), no.~13, rnaf183;
+\url{https://doi.org/10.1093/imrn/rnaf183}.
+
+\bibitem{HigherLorentzianCorrigendum}
+P. Macias Marques, C. McDaniel, and A. Seceleanu,
+\emph{Corrigendum to ``Higher Lorentzian polynomials, higher Hessians, and the Hodge--Riemann relations for graded oriented Artinian Gorenstein algebras in codimension two''},
+arXiv:2602.09976 (2026).
+
+\bibitem{Karlin}
+S. Karlin,
+\emph{Total Positivity}, Vol. I,
+Stanford University Press, Stanford, CA, 1968.
+
+\bibitem{Macdonald}
+I. G. Macdonald,
+\emph{Symmetric Functions and Hall Polynomials}, second ed.,
+Oxford Mathematical Monographs, Oxford University Press, Oxford, 1995.
+
+\bibitem{McDaniel}
+C. McDaniel,
+\emph{A Hessian criterion for totally positive Toeplitz matrices and a new proof of Cattani's theorem in two variables},
+arXiv:2507.15043 (2025).
+
+\bibitem{Postnikov}
+A. Postnikov,
+\emph{Total positivity, Grassmannians, and networks},
+arXiv:math/0609764 (2006).
+
+\bibitem{Rietsch}
+K. Rietsch,
+\emph{Totally positive Toeplitz matrices and quantum cohomology of partial flag varieties},
+J. Amer. Math. Soc. \textbf{16} (2003), no.~2, 363--392;
+erratum, J. Amer. Math. Soc. \textbf{21} (2008), no.~2, 611--614.
+
+\bibitem{RietschSurvey}
+K. Rietsch,
+\emph{Totally positive Toeplitz matrices: classical and modern},
+Proceedings of the International Congress of Mathematicians 2026, advance online publication;
+\url{https://doi.org/10.1137/25M1806727}; arXiv:2509.25163.
+
+\bibitem{Stembridge}
+J. R. Stembridge,
+\emph{A characterization of supersymmetric polynomials},
+J. Algebra \textbf{95} (1985), no.~2, 439--444;
+\url{https://doi.org/10.1016/0021-8693(85)90115-2}.
+
+\end{thebibliography}
+
+\end{document}

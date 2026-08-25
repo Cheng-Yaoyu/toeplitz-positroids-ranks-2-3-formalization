@@ -1,0 +1,18 @@
+/.lake/
+/tmp/
+/output/
+
+.DS_Store
+**/.DS_Store
+
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.olean
+
+# Preserve the original manuscript locally; publish only the corrected third revision.
+/toeplitz_positroids_ranks_2_3_second_revised.pdf
