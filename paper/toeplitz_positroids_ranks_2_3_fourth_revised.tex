@@ -31,7 +31,7 @@
 \newcommand{\PFinfty}{\mathrm{PF}_{\infty}}
 
 \title{TOEPLITZ POSITROIDS IN RANKS TWO AND THREE}
-\date{Third revised version, August 24, 2026}
+\date{Fourth revised version, August 25, 2026}
 
 \author{Yaoyu Cheng}
 \address{Faculty of Business Administration, The Chinese University of Hong Kong, Hong Kong, China}
@@ -63,7 +63,7 @@ Let $A=(a_{j-i})$ be a finite real totally nonnegative Toeplitz matrix.  We clas
 
 \section{Introduction}
 
-A real matrix is \emph{totally nonnegative} if every minor determinant is nonnegative.  If a full-row-rank $r\times n$ matrix has nonnegative maximal minors, its column matroid is a positroid; equivalently, its row span belongs to the totally nonnegative Grassmannian.  Throughout the low-rank classification, however, we impose the stronger hypothesis that the Toeplitz representative itself is totally nonnegative in \emph{all} minor orders, rather than merely requiring its maximal minors to be nonnegative.
+A real matrix is \emph{totally nonnegative} if every minor determinant is nonnegative.  If a full-row-rank $r\times n$ matrix has nonnegative maximal minors, its column matroid is a positroid; equivalently, its row span belongs to the totally nonnegative Grassmannian.  We call a rank-$r$ positroid on $[n]$ \emph{all-minor TN Toeplitz representable} if it has a full-row-rank $r\times n$ Toeplitz representative whose minors of every order are nonnegative.  Throughout the low-rank classification, ``Toeplitz positroid'' refers to this stronger notion, rather than merely requiring the maximal minors of a Toeplitz representative to be nonnegative.
 
 Postnikov's theory gives several general descriptions of positroid cells, including planar networks, Grassmann necklaces, and decorated permutations \cite{Postnikov}.  For background on total positivity and P\'olya-frequency sequences, see \cite{Karlin,FJ}; Toeplitz total positivity and its modern geometric connections are surveyed in \cite{Rietsch,RietschSurvey}.  The additional Toeplitz equations
 \[
@@ -575,6 +575,8 @@ Let
 \]
 be the order-preserving simplification map, which collapses each endpoint parallel class to its chosen representative and fixes every other element.  For $J\subseteq E$, write $\overline J=\pi(J)$ for its set of simplified images.
 
+By Theorem~\ref{thm:convex-chain}, a maximal collinear ordinary interval in the simplified chain, a nontrivial rank-two interval flat, and a maximal constant run containing at least two edge slopes are three equivalent descriptions of the same datum.
+
 \begin{definition}[Compatible rank-three Toeplitz data]\label{def:compatible}
 A collection
 \[
@@ -612,7 +614,7 @@ Lemma~\ref{lem:TN2criterion} shows that the coefficient support is an interval, 
 
 A maximal minor vanishes precisely in one of the three stated ways: it contains a loop, it contains a parallel pair, or its three distinct projective classes are collinear.
 
-It remains to justify uniqueness from the positroid support, rather than from a chosen representing matrix.  The basis set determines the rank-three matroid.  Its loops are exactly the elements contained in no basis.  For two nonloops $e,f$, the pair is parallel if and only if no basis contains both: every independent pair in a matroid extends to a basis.  Hence all parallel classes, and in particular the ordered endpoint classes $P$ and $Q$, are determined.  After simplification, a subset $X$ of at least three elements has rank two if and only if every three-element subset of $X$ is a nonbasis.  Therefore the maximal rank-two flats of the simplified matroid are determined by the basis support.  The preceding necessity argument identifies those flats with the ordinary intervals in $\mathcal H$.  Thus $\mathcal D=(L_0,R_0;P,Q;\mathcal H)$ is uniquely recovered from the positroid.
+It remains to justify uniqueness from the positroid support, rather than from a chosen representing matrix.  The basis set determines the rank-three matroid.  Its loops are exactly the elements contained in no basis.  For two nonloops $e,f$, the pair is parallel if and only if no basis contains both: every independent pair in a matroid extends to a basis.  Hence all parallel classes, and in particular the ordered endpoint classes $P$ and $Q$, are determined.  After simplification, a subset $X$ of at least three elements has rank two if and only if every three-element subset of $X$ is a nonbasis.  Therefore the nontrivial rank-two flats of the simplified matroid, namely those of cardinality at least three, are determined by the basis support.  The preceding necessity argument identifies exactly those flats with the ordinary intervals in $\mathcal H$.  Thus $\mathcal D=(L_0,R_0;P,Q;\mathcal H)$ is uniquely recovered from the positroid.
 \end{proof}
 
 The converse will be proved in Sections~8 and~9.  The compatible data classify the maximal-minor support.  For a given Toeplitz representative, the lower-order support is recovered separately: order-one support comes from the coefficient interval, and order-two support is given by Lemma~\ref{lem:TN2criterion} and its equality statement.
@@ -691,7 +693,7 @@ The construction in Lemma~\ref{lem:slope-synthesis} admits the following variant
 \[
  r_0=r_1=\cdots=r_p=R<r_{p+1},
 \]
-then columns $1,\ldots,p$ form an initial parallel class.  The first edge of the simplified chain has slope $R$.  Subsequent finite slopes can be prescribed by \eqref{eq:recurrence}.
+then columns $1,\ldots,p$ form an initial parallel class, and the first edge of the simplified chain has slope $R$.  More precisely, given any finite positive weakly increasing sequence of target slopes for the subsequent edges, one may first choose $0<R<r_{p+1}$ sufficiently small relative to those targets; all subsequent slopes are then prescribed by \eqref{eq:recurrence}.
 \item If a strictly increasing construction reaches $r_{k-1}<r_k=R$ and one appends
 \[
  r_{k+1}=\cdots=r_{k+q}=R,
@@ -727,7 +729,7 @@ For (1), the points $Q_1,\ldots,Q_p$ all equal $(R,R^2)$, while
 \[
  Q_{p+1}=(r_{p+1},Rr_{p+1});
 \]
-the slope from the first projective class to the next is $R$.  The next finite slope is given by \eqref{eq:slopeformula} and is larger than $r_{p+1}>R$.  For (2),
+the slope from the first projective class to the next is $R$.  For a fixed finite positive weakly increasing target sequence, take $R=\varepsilon$ and $r_{p+1}=2\varepsilon$.  The finite-induction argument of Lemma~\ref{lem:slope-synthesis}, beginning at index $p+1$, gives a common threshold $\varepsilon_0>0$ such that every recurrence denominator is positive and all the target slopes are realized whenever $0<\varepsilon<\varepsilon_0$.  In particular, the next finite target slope is larger than $r_{p+1}>R$.  For (2),
 \[
  Q_k=(R,r_{k-1}R),
  \qquad
@@ -760,7 +762,7 @@ there is a Toeplitz coefficient sequence for which the simplification map has fi
  \pi^{-1}(e_m)&=\{k+1,\ldots,k+q\}.
 \end{aligned}
 \end{equation}
-The only nonsingleton parallel classes are the first and last fibers in \eqref{eq:raw-simple-map}, and the nontrivial maximal constant runs of the simplified edge-slope sequence are exactly the intervals in $\mathcal H$.  The resulting matrix is full-row-rank and totally nonnegative.
+The only nonsingleton parallel classes are the first and last fibers in \eqref{eq:raw-simple-map}, and the nontrivial maximal constant runs of the simplified edge-slope sequence are exactly the intervals in $\mathcal H$.  Every adjacent slope comparison not prescribed by one of these intervals is strict, so no unintended equality occurs.  The resulting matrix is full-row-rank and totally nonnegative.
 \end{lemma}
 
 \begin{proof}
@@ -1037,7 +1039,7 @@ there is a positive vector $b=(b_0,\ldots,b_d)$, arbitrarily close to the sine v
  t\in Z
  \qquad(1\le t\le d-1).
 \end{equation}
-All nonstructural minors of order at most two are positive.
+All entries of $C(b)$ are nonnegative, and every nonstructural $2\times2$ minor is positive.
 \end{theorem}
 
 \begin{proof}
@@ -1221,7 +1223,7 @@ For $I=[r]$, condition \eqref{eq:structural} is automatic.  Writing $\ell=k-p$, 
  j_\ell\le\ell+q,
  \qquad 1\le\ell\le r-p.
 \]
-Monotonicity of the $j_\ell$ makes this family equivalent to its last inequality, which is \eqref{eq:Schubert-condition}.  The cardinality form and the uniform cases follow immediately.
+Since $j_1<\cdots<j_r$ are strictly increasing integers, $j_{\ell+1}\ge j_\ell+1$, so the sequence $j_\ell-\ell$ is weakly increasing.  Therefore the displayed family is equivalent to its last inequality, which is \eqref{eq:Schubert-condition}.  The cardinality form and the uniform cases follow immediately.
 \end{proof}
 
 \section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
@@ -1296,8 +1298,8 @@ Oxford Mathematical Monographs, Oxford University Press, Oxford, 1995.
 
 \bibitem{McDaniel}
 C. McDaniel,
-\emph{A Hessian criterion for totally positive Toeplitz matrices and a new proof of Cattani's theorem in two variables},
-arXiv:2507.15043 (2025).
+\emph{A Hessian criterion for totally nonnegative Toeplitz matrices and a theorem of Cattani},
+arXiv:2507.15043v2 (2026).
 
 \bibitem{Postnikov}
 A. Postnikov,

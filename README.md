@@ -10,11 +10,13 @@ formula. The arbitrary-rank paving sector is treated separately in **Paper B**:
 
 ## Paper
 
-The corrected third revision is available as
-[`paper/toeplitz_positroids_ranks_2_3_third_revised.pdf`](paper/toeplitz_positroids_ranks_2_3_third_revised.pdf),
-with its LaTeX source in the same directory.  This revision makes the standing
-total-nonnegativity hypothesis explicit in Corollary 4 and records the positive
-Toeplitz counterexample showing that entrywise positivity alone is insufficient.
+The corrected fourth revision is available as
+[`paper/toeplitz_positroids_ranks_2_3_fourth_revised.pdf`](paper/toeplitz_positroids_ranks_2_3_fourth_revised.pdf),
+with its LaTeX source in the same directory.  It makes the standing
+total-nonnegativity hypothesis explicit in Corollary 4, records the positive
+Toeplitz counterexample showing that entrywise positivity alone is insufficient,
+and incorporates the terminology, quantifier, and bibliography clarifications
+from the subsequent independent assessment.
 
 The project is pinned to Lean and mathlib `v4.29.0`. Build the checked library
 with:

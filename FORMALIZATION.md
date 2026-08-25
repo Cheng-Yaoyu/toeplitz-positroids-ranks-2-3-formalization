@@ -1,7 +1,7 @@
 # Formalization status
 
 This project formalizes *Toeplitz Positroids in Ranks Two and Three* in Lean 4.
-The source paper is `paper/toeplitz_positroids_ranks_2_3_third_revised.tex`; theorem
+The source paper is `paper/toeplitz_positroids_ranks_2_3_fourth_revised.tex`; theorem
 names in the Lean development retain the paper's descriptive labels whenever
 possible.
 
