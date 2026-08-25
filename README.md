@@ -1,6 +1,12 @@
-# Toeplitz Positroids
+# Toeplitz Positroids in Ranks Two and Three
 
 Lean 4 formalization of *Toeplitz Positroids in Ranks Two and Three*.
+
+This repository is **Paper A** in the Toeplitz-positroid project. It gives the
+complete rank-two and rank-three classification, including loops, endpoint
+parallel classes, lower-rank interval flats, and the finite-Edrei support
+formula. The arbitrary-rank paving sector is treated separately in **Paper B**:
+[`Cheng-Yaoyu/paving-toeplitz-positroids-formalization`](https://github.com/Cheng-Yaoyu/paving-toeplitz-positroids-formalization).
 
 ## Paper
 
