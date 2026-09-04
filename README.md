@@ -5,18 +5,26 @@ Lean 4 formalization of *Toeplitz Positroids in Ranks Two and Three*.
 This repository is **Paper A** in the Toeplitz-positroid project. It gives the
 complete rank-two and rank-three classification, including loops, endpoint
 parallel classes, lower-rank interval flats, and the finite-Edrei support
-formula. The arbitrary-rank paving sector is treated separately in **Paper B**:
-[`Cheng-Yaoyu/paving-toeplitz-positroids-formalization`](https://github.com/Cheng-Yaoyu/paving-toeplitz-positroids-formalization).
+formula.
 
 ## Paper
 
-The corrected fourth revision is available as
-[`paper/toeplitz_positroids_ranks_2_3_fourth_revised.pdf`](paper/toeplitz_positroids_ranks_2_3_fourth_revised.pdf),
-with its LaTeX source in the same directory.  It makes the standing
+- [Manuscript PDF](paper/toeplitz_positroids_ranks_2_3_fourth_revised.pdf)
+- [LaTeX source](paper/toeplitz_positroids_ranks_2_3_fourth_revised.tex)
+
+## Toeplitz-positroid series
+
+- **Paper A:** this repository
+- **Paper B:** [Positive Consecutive-Minor Interpolation and Paving Toeplitz Positroids](https://github.com/Cheng-Yaoyu/paving-toeplitz-positroids-formalization)
+- **Paper C:** [Truncations, Circuit Layers, and Quantum Boundary Charts for Totally Nonnegative Toeplitz Positroids](https://github.com/Cheng-Yaoyu/toeplitz-positroids-truncations-boundary-charts-formalization)
+
+The corrected fourth revision makes the standing
 total-nonnegativity hypothesis explicit in Corollary 4, records the positive
 Toeplitz counterexample showing that entrywise positivity alone is insufficient,
 and incorporates the terminology, quantifier, and bibliography clarifications
 from the subsequent independent assessment.
+
+## Reproducibility
 
 The project is pinned to Lean and mathlib `v4.29.0`. Build the checked library
 with:
@@ -24,6 +32,8 @@ with:
 ```sh
 lake build
 ```
+
+## Formalization
 
 See `FORMALIZATION.md` for the theorem crosswalk, explicit clarifications made
 during formalization, and correctness findings.  The zero-gamma Edrei
@@ -68,3 +78,17 @@ support criterion.
 `Edrei.TableauAlphaBijection` additionally proves deterministic path uniqueness
 and canonical-map bijectivity for the one-alpha/no-beta network slice, including
 the exact finite-factor tableau expansion.
+
+## Repository layout
+
+- `ToeplitzPositroids/`: Paper A theorem modules;
+- `ToeplitzPositroids.lean`: root import;
+- `paper/`: current manuscript PDF and LaTeX source;
+- `FORMALIZATION.md`: paper-to-Lean crosswalk and audit;
+- `CITATION.cff`: machine-readable citation metadata.
+
+## Citation
+
+Use the citation metadata in [`CITATION.cff`](CITATION.cff). Until an arXiv or
+journal identifier is assigned, cite the manuscript together with this GitHub
+repository.

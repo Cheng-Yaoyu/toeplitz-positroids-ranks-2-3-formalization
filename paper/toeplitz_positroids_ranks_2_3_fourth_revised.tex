@@ -31,7 +31,7 @@
 \newcommand{\PFinfty}{\mathrm{PF}_{\infty}}
 
 \title{TOEPLITZ POSITROIDS IN RANKS TWO AND THREE}
-\date{Fourth revised version, August 25, 2026}
+\date{Fourth revised version, September 4, 2026}
 
 \author{Yaoyu Cheng}
 \address{Faculty of Business Administration, The Chinese University of Hong Kong, Hong Kong, China}
@@ -81,7 +81,7 @@ Our first ingredient is an exact order-two criterion.  For a three-row Toeplitz 
  \longmapsto
  \left(1,\frac{y+2z}{x+y+z},\frac{z}{x+y+z}\right)^{\transpose}.
 \]
-For two nonzero columns $c_i,c_j$, the change in the first moment satisfies the subtraction-free identity
+For two nonzero columns $c_i,c_j$, their first moments satisfy the subtraction-free identity
 \[
  s_is_j(u_j-u_i)
  =\Delta^{12}_{ij}+2\Delta^{13}_{ij}+\Delta^{23}_{ij},
@@ -112,7 +112,7 @@ The last assertion is an essential part of the result.  When at most one side ha
 \]
 At the sine point $b_t=\sin((t+1)\pi/(d+2))$, all interior consecutive maximal minors vanish, while the order-two minors are strictly positive.  We prove that the map from the interior coefficients to the interior consecutive maximal minors has positive-definite Jacobian there.  The inverse function theorem then realizes an arbitrary sufficiently small nonnegative vector of consecutive minors, and hence every prescribed zero pattern.
 
-As a complementary arbitrary-rank result, we treat one-sided $\PFinfty$ sequences with finitely many positive Edrei parameters.  A supersymmetric Jacobi--Trudi expansion gives an exact zero--nonzero criterion for every Toeplitz minor.  On the first $r$ rows, the criterion reduces to a single Schubert condition and therefore identifies the represented positroid explicitly.
+As a complementary arbitrary-rank result, we treat one-sided $\PFinfty$ sequences with finitely many positive Edrei parameters.  A supersymmetric Jacobi--Trudi expansion gives an exact zero--nonzero criterion for every Toeplitz minor.  On the first $r$ rows, the criterion reduces to a single Schubert condition and therefore identifies the represented positroid explicitly.  The arbitrary-rank paving layer and the subsequent truncation and boundary-chart developments are continued in the companion manuscripts \cite{PaperB,PaperC}.
 
 The proof architecture is related to the positive-identity method of \cite{GCQ}.  There, signed determinant expansions are split into their even and odd halves and equality is descended without subtraction or additive cancellation.  Here, nonnegative minor identities and positive changes of coordinates play the corresponding role: a positive sum vanishes only when each summand vanishes, and local equality data descend to loops, parallel classes, and collinear intervals.
 
@@ -904,7 +904,7 @@ Write the columns of $C(b)$ as
  c_j=(b_j,b_{j-1},b_{j-2})^{\transpose},
  \qquad 0\le j\le d+2.
 \]
-Suppose that $b$ is strictly log-concave, with the zero boundary convention.  Lemma~\ref{lem:TN2criterion} then makes $C(b)$ $\TN_2$ with all nonstructural $2\times2$ minors positive.  The boundary support patterns and the strict nonstructural minors exclude parallel columns, so Lemma~\ref{lem:moment-separation} gives strictly increasing moment coordinates
+Suppose that $b$ is strictly log-concave, with the zero boundary convention.  Lemma~\ref{lem:TN2criterion} makes $C(b)$ $\TN_2$, with every nonstructural $2\times2$ minor positive.  Together with the boundary support patterns, this excludes parallel columns.  Lemma~\ref{lem:moment-separation} therefore gives strictly increasing moment coordinates
 \[
  u_0<u_1<\cdots<u_{d+2}.
 \]
@@ -1226,6 +1226,10 @@ For $I=[r]$, condition \eqref{eq:structural} is automatic.  Writing $\ell=k-p$, 
 Since $j_1<\cdots<j_r$ are strictly increasing integers, $j_{\ell+1}\ge j_\ell+1$, so the sequence $j_\ell-\ell$ is weakly increasing.  Therefore the displayed family is equivalent to its last inequality, which is \eqref{eq:Schubert-condition}.  The cardinality form and the uniform cases follow immediately.
 \end{proof}
 
+\section*{Data and code availability}
+The manuscript, Lean~4 formalization, and reproducibility instructions are available at
+the \href{https://github.com/Cheng-Yaoyu/toeplitz-positroids-ranks-2-3-formalization}{GitHub repository}.
+
 \section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
 
 During the preparation of this work, the authors used OpenAI's ChatGPT to explore proof strategies, check formal polynomial identities, and assist in drafting.  The authors reviewed and edited the resulting material and take full responsibility for the content of the publication.
@@ -1268,7 +1272,7 @@ SIAM J. Matrix Anal. Appl. \textbf{14} (1993), no.~4, 1132--1140;
 \bibitem{GCQ}
 S. Gu, W. Qi, and Y. Cheng,
 \emph{Transpose symmetry of injectivity over commutative semirings},
-arXiv:2608.16205 (2026).
+arXiv:2608.16205v1 (2026).
 
 \bibitem{GarciaTierz}
 D. Garc\'ia-Garc\'ia and M. Tierz,
@@ -1284,7 +1288,7 @@ Int. Math. Res. Not. IMRN (2025), no.~13, rnaf183;
 \bibitem{HigherLorentzianCorrigendum}
 P. Macias Marques, C. McDaniel, and A. Seceleanu,
 \emph{Corrigendum to ``Higher Lorentzian polynomials, higher Hessians, and the Hodge--Riemann relations for graded oriented Artinian Gorenstein algebras in codimension two''},
-arXiv:2602.09976 (2026).
+arXiv:2602.09976v1 (2026).
 
 \bibitem{Karlin}
 S. Karlin,
@@ -1301,6 +1305,18 @@ C. McDaniel,
 \emph{A Hessian criterion for totally nonnegative Toeplitz matrices and a theorem of Cattani},
 arXiv:2507.15043v2 (2026).
 
+\bibitem{PaperB}
+Y. Cheng, S. Gu, and W. Qi,
+\emph{Positive consecutive-minor interpolation and paving Toeplitz positroids},
+companion preprint, revised September 2026,
+\href{https://github.com/Cheng-Yaoyu/paving-toeplitz-positroids-formalization/blob/main/paper/positive_consecutive_minor_interpolation_and_paving_toeplitz_positroids.pdf}{GitHub manuscript}.
+
+\bibitem{PaperC}
+Y. Cheng, S. Gu, and W. Qi,
+\emph{Truncations, circuit layers, and quantum boundary charts for totally nonnegative Toeplitz positroids},
+companion preprint, revised September 2026,
+\href{https://github.com/Cheng-Yaoyu/toeplitz-positroids-truncations-boundary-charts-formalization/blob/main/paper/toeplitz_positroids_truncations_boundary_charts.pdf}{GitHub manuscript}.
+
 \bibitem{Postnikov}
 A. Postnikov,
 \emph{Total positivity, Grassmannians, and networks},
@@ -1315,8 +1331,10 @@ erratum, J. Amer. Math. Soc. \textbf{21} (2008), no.~2, 611--614.
 \bibitem{RietschSurvey}
 K. Rietsch,
 \emph{Totally positive Toeplitz matrices: classical and modern},
-Proceedings of the International Congress of Mathematicians 2026, advance online publication;
-\url{https://doi.org/10.1137/25M1806727}; arXiv:2509.25163.
+in \emph{Proceedings of the International Congress of Mathematicians 2026},
+Vol.~3, invited lectures, 2026,
+\href{https://doi.org/10.1137/25M1806727}{doi:10.1137/25M1806727};
+arXiv:2509.25163v3.
 
 \bibitem{Stembridge}
 J. R. Stembridge,
